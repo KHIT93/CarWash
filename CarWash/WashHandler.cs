@@ -4,30 +4,54 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using CarWash.Models.Programs;
 
 namespace CarWash
 {
     public interface IWashHandler
     {
-        Task WashCar(int machineID);
-        Task WashCar(int machineID, CancellationToken ct);
-        Task WashCar(int machineID, CancellationToken ct, IProgress<string> progress);
+        Task WashCarBase(int machineID);
+        Task WashCarBase(int machineID, CancellationToken ct);
+        Task WashCarBase(int machineID, CancellationToken ct, IProgress<BaseCarWash> progress);
+
+        Task WashCarStandard(int machineID);
+        Task WashCarStandard(int machineID, CancellationToken ct);
+        Task WashCarStandard(int machineID, CancellationToken ct, IProgress<StandardCarWash> progress);
     }
     class WashHandler : IWashHandler
     {
-        public Task WashCar(int machineID)
+
+        public Task WashCarBase(int machineID)
         {
-            return WashCar(machineID, CancellationToken.None);
+            return WashCarBase(machineID, CancellationToken.None);
         }
 
-        public Task WashCar(int machineID, CancellationToken ct)
+        public Task WashCarBase(int machineID, CancellationToken ct)
         {
-            return WashCar(machineID, ct, new Progress<string>());
+            return WashCarBase(machineID, ct, new Progress<BaseCarWash>());
         }
 
-        public Task WashCar(int machineID, CancellationToken ct, IProgress<string> progress)
+        public Task WashCarBase(int machineID, CancellationToken ct, IProgress<BaseCarWash> progress)
         {
-            return Task.Run(() => 
+            return Task.Run(() =>
+            {
+
+            });
+        }
+
+        public Task WashCarStandard(int machineID)
+        {
+            return WashCarStandard(machineID, CancellationToken.None);
+        }
+
+        public Task WashCarStandard(int machineID, CancellationToken ct)
+        {
+            return WashCarStandard(machineID, ct, new Progress<StandardCarWash>());
+        }
+
+        public Task WashCarStandard(int machineID, CancellationToken ct, IProgress<StandardCarWash> progress)
+        {
+            return Task.Run(() =>
             {
 
             });
