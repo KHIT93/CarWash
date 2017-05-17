@@ -35,7 +35,13 @@
     <Compile Include="Interfaces\ICarWashProcess.cs" />
     <Compile Include="Programs\StandardCarWash.cs" />
     <Compile Include="Programs\BaseCarWash.cs" />
-    <Compile Include="Processes\BaseCarWashProcess.cs" />
+    <Compile Include="Processes\BaseProcess.cs" />
+    <Compile Include="Processes\SoakingProcess.cs" />
+    <Compile Include="Processes\WashProcess.cs" />
+    <Compile Include="Processes\UnderbodyWashProcess.cs" />
+    <Compile Include="Processes\RinseProcess.cs" />
+    <Compile Include="Processes\DryingProcess.cs" />
+    <Compile Include="Processes\WaxProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
