@@ -7,6 +7,11 @@ namespace CarWash.Models.Interfaces
     public interface ICarWashProcess
     {
         /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:CarWash.Models.Interfaces.ICarWashProcess"/> is running.
+        /// </summary>
+        /// <value><c>true</c> if running; otherwise, <c>false</c>.</value>
+        bool Running { get; set; }
+        /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:CarWash.Models.Interfaces.ICarWashProcess"/> is finished.
         /// </summary>
         /// <value><c>true</c> if finished; otherwise, <c>false</c>.</value>

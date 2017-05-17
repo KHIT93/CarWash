@@ -1,4 +1,5 @@
 ﻿﻿using System;
+using System.Threading;
 using CarWash.Models.Interfaces;
 namespace CarWash.Models.Processes
 {
@@ -32,26 +33,36 @@ namespace CarWash.Models.Processes
 		/// </summary>
 		/// <value>The name.</value>
 		public string Name { get; set; }
-		/// <summary>
-		/// Cancel this process. This defines when it is allowed to cancel the process.
-		/// </summary>
-		public virtual void Cancel()
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:CarWash.Models.Processes.BaseProcess"/> is running.
+        /// </summary>
+        /// <value><c>true</c> if running; otherwise, <c>false</c>.</value>
+        public abstract bool Running { get; set; }
+
+        /// <summary>
+        /// Cancel this process. This defines when it is allowed to cancel the process.
+        /// </summary>
+        public virtual void Cancel()
         {
-            throw new NotImplementedException();
+            this.Running = true;
+            Thread.Sleep(200);
+            this.Running = false;
+            this.Finished = true;
         }
 		/// <summary>
 		/// Execute the process
 		/// </summary>
 		public virtual void Execute()
         {
-            throw new NotImplementedException();
+            Thread.Sleep(this.TimeToRun);
         }
 		/// <summary>
 		/// Skip this process.
 		/// </summary>
 		public virtual void Skip()
         {
-            throw new NotImplementedException();
+            this.Skipped = true;
+            //Write on screen that this will be skipped
         }
     }
 }

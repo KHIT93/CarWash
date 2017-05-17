@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using CarWash.Models.Interfaces;
 namespace CarWash.Models.Programs
 {
@@ -32,14 +33,24 @@ namespace CarWash.Models.Programs
 		/// </summary>
 		public virtual void Cancel()
         {
-            throw new NotImplementedException();
+            //Loop through all processes and cancel anything that is currently running
+            this.Processes.ForEach(CancelProcess);
+            Thread.Sleep(100);
         }
 		/// <summary>
 		/// Execute the car wash program.
 		/// </summary>
 		public virtual void Execute()
         {
-            throw new NotImplementedException();
+            foreach (ICarWashProcess process in this.Processes)
+            {
+                process.Execute();
+            }
+        }
+
+        protected virtual void CancelProcess(ICarWashProcess process)
+        {
+            process.Cancel();
         }
     }
 }
