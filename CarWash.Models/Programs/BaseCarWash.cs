@@ -35,6 +35,8 @@ namespace CarWash.Models.Programs
         {
             //Loop through all processes and cancel anything that is currently running
             this.Processes.ForEach(CancelProcess);
+            this.Cancelled = true;
+            this.Running = false;
             Thread.Sleep(100);
         }
 		/// <summary>
@@ -42,10 +44,12 @@ namespace CarWash.Models.Programs
 		/// </summary>
 		public virtual void Execute()
         {
+            this.Running = true;
             foreach (ICarWashProcess process in this.Processes)
             {
                 process.Execute();
             }
+            this.Running = false;
         }
 
         protected virtual void CancelProcess(ICarWashProcess process)
