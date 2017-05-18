@@ -13,10 +13,10 @@ namespace CarWash.Models.Programs
             {
                 new RinseProcess(),
                 new SoakingProcess(),
-                new WashProcess{ TimeToRun = 240 },
+                new WashProcess{ TimeToRun = 24000 },
                 new UnderbodyWashProcess(),
                 new WaxProcess(),
-                new DryingProcess { TimeToRun = 180 }
+                new DryingProcess { TimeToRun = 18000 }
 			};
         }
     }

@@ -6,7 +6,7 @@ namespace CarWash.Models.Processes
         public UnderbodyWashProcess()
         {
             this.Name = "Underbody Wash";
-            this.TimeToRun = 60;
+            this.TimeToRun = 6000;
         }
     }
 }

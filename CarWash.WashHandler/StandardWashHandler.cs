@@ -2,33 +2,49 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CarWash.Models.Programs;
+using System.ComponentModel;
 
-namespace CarWash.WashHandler
+namespace CarWash
 {
     public interface IStandardWashHandler
     {
-        Task WashCarStandard(int machineID);
-        Task WashCarStandard(int machineID, CancellationToken ct);
-        Task WashCarStandard(int machineID, CancellationToken ct, IProgress<StandardCarWash> progress);
+        void WashCarStandard(int machineID);
     }
     class StandardWashHandler : IStandardWashHandler
     {
-        public Task WashCarStandard(int machineID)
+        BackgroundWorker bw;
+
+        public void WashCarStandard(int machineID)
         {
-            return WashCarStandard(machineID, CancellationToken.None);
+            bw = new BackgroundWorker();
+
+            bw.WorkerReportsProgress = true;
+            bw.WorkerSupportsCancellation = true;
+
+            bw.DoWork += WashCarStandard_DoWork;
+            bw.ProgressChanged += WashCarStandard_ProgressChanged;
+            bw.RunWorkerCompleted += WashCarStandard_RunWorkerCompleted;
+
         }
 
-        public Task WashCarStandard(int machineID, CancellationToken ct)
+        private void WashCarStandard_DoWork(object sender, DoWorkEventArgs e)
         {
-            return WashCarStandard(machineID, ct, new Progress<StandardCarWash>());
+
         }
 
-        public Task WashCarStandard(int machineID, CancellationToken ct, IProgress<StandardCarWash> progress)
+        private void WashCarStandard_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            return Task.Run(() =>
-            {
 
-            });
+        }
+
+        private void WashCarStandard_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        public void CancelWashCarStandard(int machineID)
+        {
+
         }
     }
 }
