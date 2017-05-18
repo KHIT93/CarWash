@@ -51,7 +51,19 @@ namespace CarWash.Models.Programs
             }
             this.Running = false;
         }
-
+		/// <summary>
+		/// Status for how far this instance is with the processing.
+		/// </summary>
+		/// <returns>The status.</returns>
+        public virtual int Status()
+        {
+            int singleProcessPercentage = 100 / this.Processes.Count;
+            return this.Processes.FindAll(p => p.Finished == true).Count;
+        }
+        /// <summary>
+        /// Cancels a process.
+        /// </summary>
+        /// <param name="process">Process.</param>
         protected virtual void CancelProcess(ICarWashProcess process)
         {
             process.Cancel();
