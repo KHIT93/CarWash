@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarWash.Models;
 
 namespace CarWash.WashHandler
 {
     public class Handler
     {
+        List<CarWashMachine> machineList;
+
+        public Handler()
+        {
+            machineList = new List<CarWashMachine>();
+        }
+
         public void StartWash(int machineID, int selectedWash)
         {
             switch (selectedWash)
@@ -26,6 +34,32 @@ namespace CarWash.WashHandler
             }
         }
 
+        private bool CheckIfMachineBusy(int machineID)
+        {
+            CarWashMachine machine = CreateMachineIfNotExist(machineID);
+            if (machine.Program == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private CarWashMachine CreateMachineIfNotExist(int machineID)
+        {
+            CarWashMachine machine;
+            if (!machineList.Exists(i => i.Id() == machineID))
+            {
+                machine = new CarWashMachine(machineID);
+                machineList.Add(machine);
+            }
+            else
+            {
+                machine = machineList.Find(i => i.Id() == machineID);
+            }
+            
+            return machine;
+        }
+
         private void StartStandardWash(int machineID)
         {
 
@@ -33,6 +67,7 @@ namespace CarWash.WashHandler
 
         private void StartSilverWash(int machineID)
         {
+            CarWashMachine machine = machineList.Find(i => i.Id() == machineID);
             SilverWashHandler handler = new SilverWashHandler();
             handler.WashCarSilver(machineID);
         }
