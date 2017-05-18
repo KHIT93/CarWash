@@ -11,7 +11,7 @@ namespace CarWash.WashHandler
         Task WashCarSilver(int machineID, CancellationToken ct);
         Task WashCarSilver(int machineID, CancellationToken ct, IProgress<SilverCarWash> progress);
     }
-    public class SilverWashHandler : ISilverWashHandler
+    class SilverWashHandler : ISilverWashHandler
     {
         SilverCarWash carWash; 
 
@@ -35,11 +35,6 @@ namespace CarWash.WashHandler
             });
 
             t.Start();
-            carWash.Execute();
-            Console.WriteLine(GetStatus().ToString());
-            Thread.Sleep(1000);
-            Console.WriteLine(GetStatus().ToString());
-            t.Wait();
 
             return t;
         }
