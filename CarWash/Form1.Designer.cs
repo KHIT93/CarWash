@@ -170,7 +170,7 @@
             this.ClientSize = new System.Drawing.Size(827, 666);
             this.Controls.Add(this.tcCarWash);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "CarWash";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

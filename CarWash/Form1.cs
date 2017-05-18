@@ -29,8 +29,7 @@ namespace CarWash
             if (rdbtnStandardWash.Checked)
             {
                 selectedWash = (int)WashType.Standard;
-                txtInfoWash.Visible = true;
-                txtInfoWash.Text = "Standardvask informationer";
+                StandardInfo();
             }
         }
 
@@ -100,10 +99,16 @@ namespace CarWash
             rdbtnGoldWash.Enabled = false;
         }
 
+        public void StandardInfo()
+        {
+            txtInfoWash.Visible = true;
+            lblCurrentStatus.Text = txtInfoWash.Text = "Standardvask informationer";
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            btnStartWash.Enabled = false;
-            btnCancelWash.Enabled = false;
+            txtInfoWash.Visible = true;
+            StandardInfo();
         }
 
         public Task StartWashProgBar(CancellationToken ct ,IProgress<ImportProgress> progressObserver)
