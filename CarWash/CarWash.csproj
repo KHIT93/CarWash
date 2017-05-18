@@ -83,6 +83,10 @@
       <Project>{9de63db7-6430-42d4-a54f-99a5d9e2fe79}</Project>
       <Name>CarWash.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CarWash.WashHandler\CarWash.WashHandler.csproj">
+      <Project>{f6426b3c-777e-4c13-b1e4-17d07fc0eca5}</Project>
+      <Name>CarWash.WashHandler</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
