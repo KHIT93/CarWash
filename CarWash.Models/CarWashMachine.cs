@@ -5,6 +5,11 @@ namespace CarWash.Models
 {
     public class CarWashMachine : ICarWashMachine
     {
+        public CarWashMachine(int ID)
+        {
+            this._id = ID;
+        }
+        protected int _id;
         protected ICarWashProgram _program;
 		/// <summary>
 		/// Gets or sets the <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> instance that should be executed.
@@ -54,6 +59,14 @@ namespace CarWash.Models
 		public bool IsAvailable()
         {
             return this._program == null;
+        }
+
+        /// <summary>
+        /// Gets the ID of the currently running instance.
+        /// </summary>
+        public int Id()
+        {
+            return this._id;
         }
     }
 }
