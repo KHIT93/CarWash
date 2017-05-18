@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +9,7 @@ namespace CarWash
     public partial class Form1 : Form
     {
         int selectedWash;
+        CancellationTokenSource tcs;
 
         enum WashType
         {
@@ -68,6 +63,10 @@ namespace CarWash
         {
             //Anullering af vask
 
+            tcs.Cancel();
+
+            lblCurrentStatus.Visible = false;
+
             btnStartWash.Enabled = true;
             rdbtnStandardWash.Enabled = true;
             rdbtnSilverWash.Enabled = true;
@@ -81,23 +80,54 @@ namespace CarWash
 
         private void btnStartWash_Click(object sender, EventArgs e)
         {
-            //Start af vask
+            ///Start af vask
+
+            //Progressbar
+            tcs = new CancellationTokenSource();
+            CancellationToken ct = tcs.Token;
+
+            Task progBar = StartWashProgBar(ct ,new Progress<ImportProgress>(DisplayProgress));
+
+            //Får overført valgt radiobutton
+            int SelectedWash = selectedWash;
+
+            //Sætter labal synlig, og giver den en forudbestemt tekst
+            lblCurrentStatus.Visible = true;
+            lblCurrentStatus.Text = "Vask igang!";
 
             btnStartWash.Enabled = false;
             rdbtnStandardWash.Enabled = false;
             rdbtnSilverWash.Enabled = false;
             rdbtnGoldWash.Enabled = false;
-
-            Handler WashHandler = new Handler();
-            WashHandler.StartWash(1, selectedWash);
-            Thread.Sleep(1000);
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             btnStartWash.Enabled = false;
             btnCancelWash.Enabled = false;
+        }
+
+        public Task StartWashProgBar(CancellationToken ct ,IProgress<ImportProgress> progressObserver)
+        {
+            return Task.Run(() =>
+            {
+                for (int i = 0; i <= 100; i++)
+                {
+                    ct.ThrowIfCancellationRequested();
+                    progressObserver.Report(new ImportProgress { OverallProgress = i });
+                    Thread.Sleep(250);
+                }
+            });
+        }
+
+        public class ImportProgress
+        {
+            public int OverallProgress { get; set; }
+        }
+
+        private void DisplayProgress(ImportProgress progress)
+        {
+            progBarWash.Value = progress.OverallProgress;
         }
     }
 }

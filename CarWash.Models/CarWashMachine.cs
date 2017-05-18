@@ -6,11 +6,11 @@ namespace CarWash.Models
     public class CarWashMachine : ICarWashMachine
     {
         protected ICarWashProgram _program;
-        public CarWashMachine()
-        {
-        }
-
-        public ICarWashProgram Program
+		/// <summary>
+		/// Gets or sets the <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> instance that should be executed.
+		/// </summary>
+		/// <value>The <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> instance.</value>
+		public ICarWashProgram Program
         {
             get
             {
@@ -31,20 +31,27 @@ namespace CarWash.Models
                 }
             }
         }
-
-        public void Cancel()
+		/// <summary>
+		/// Cancel the current <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> execution.
+		/// </summary>
+		public void Cancel()
         {
             this.Program.Cancel();
             this._program = null;
         }
-
-        public void Execute()
+		/// <summary>
+		/// Execute the assigned <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> instance.
+		/// </summary>
+		public void Execute()
         {
             this.Program.Execute();
             this._program = null;
         }
-
-        public bool IsAvailable()
+		/// <summary>
+		/// Determines if the <see cref="T:CarWash.Models.Interfaces.ICarWashMachine"/> instance is available to set a new job.
+		/// </summary>
+		/// <returns><c>true</c>, if the machine is available to start a new program, <c>false</c> otherwise.</returns>
+		public bool IsAvailable()
         {
             return this._program == null;
         }

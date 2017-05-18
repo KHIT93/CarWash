@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using CarWash.Models.Interfaces;
 namespace CarWash.Models.Programs
 {
@@ -35,9 +36,9 @@ namespace CarWash.Models.Programs
         {
             //Loop through all processes and cancel anything that is currently running
             this.Processes.ForEach(CancelProcess);
-            this.Cancelled = true;
+			Task.Delay(100);
+			this.Cancelled = true;
             this.Running = false;
-            Thread.Sleep(100);
         }
 		/// <summary>
 		/// Execute the car wash program.

@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tcCarWash = new System.Windows.Forms.TabControl();
+            this.txtInfoWash = new System.Windows.Forms.TextBox();
+            this.btnSendStatistic = new System.Windows.Forms.Button();
             this.lblCurrentStatus = new System.Windows.Forms.Label();
-            this.rdbtnSilverWash = new System.Windows.Forms.RadioButton();
             this.progBarWash = new System.Windows.Forms.ProgressBar();
             this.btnCancelWash = new System.Windows.Forms.Button();
             this.btnStartWash = new System.Windows.Forms.Button();
-            this.txtInfoWash = new System.Windows.Forms.TextBox();
-            this.btnSendStatistic = new System.Windows.Forms.Button();
-            this.rdbtnStandardWash = new System.Windows.Forms.RadioButton();
             this.rdbtnGoldWash = new System.Windows.Forms.RadioButton();
+            this.rdbtnSilverWash = new System.Windows.Forms.RadioButton();
+            this.rdbtnStandardWash = new System.Windows.Forms.RadioButton();
+            this.tcCarWash = new System.Windows.Forms.TabControl();
             this.tabPage1.SuspendLayout();
             this.tcCarWash.SuspendLayout();
             this.SuspendLayout();
@@ -62,36 +62,35 @@
             this.tabPage1.Text = "Bilvask 1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tcCarWash
+            // txtInfoWash
             // 
-            this.tcCarWash.Controls.Add(this.tabPage1);
-            this.tcCarWash.Location = new System.Drawing.Point(12, 12);
-            this.tcCarWash.Name = "tcCarWash";
-            this.tcCarWash.SelectedIndex = 0;
-            this.tcCarWash.Size = new System.Drawing.Size(803, 642);
-            this.tcCarWash.TabIndex = 0;
+            this.txtInfoWash.Location = new System.Drawing.Point(207, 40);
+            this.txtInfoWash.Multiline = true;
+            this.txtInfoWash.Name = "txtInfoWash";
+            this.txtInfoWash.Size = new System.Drawing.Size(544, 113);
+            this.txtInfoWash.TabIndex = 8;
+            this.txtInfoWash.Visible = false;
+            // 
+            // btnSendStatistic
+            // 
+            this.btnSendStatistic.Location = new System.Drawing.Point(610, 496);
+            this.btnSendStatistic.Name = "btnSendStatistic";
+            this.btnSendStatistic.Size = new System.Drawing.Size(141, 64);
+            this.btnSendStatistic.TabIndex = 7;
+            this.btnSendStatistic.Text = "Send statistik";
+            this.btnSendStatistic.UseVisualStyleBackColor = true;
+            this.btnSendStatistic.Click += new System.EventHandler(this.btnSendStatistic_Click);
             // 
             // lblCurrentStatus
             // 
             this.lblCurrentStatus.AutoSize = true;
             this.lblCurrentStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentStatus.Location = new System.Drawing.Point(344, 372);
+            this.lblCurrentStatus.Location = new System.Drawing.Point(317, 347);
             this.lblCurrentStatus.Name = "lblCurrentStatus";
             this.lblCurrentStatus.Size = new System.Drawing.Size(51, 20);
             this.lblCurrentStatus.TabIndex = 6;
             this.lblCurrentStatus.Text = "label1";
             this.lblCurrentStatus.Visible = false;
-            // 
-            // rdbtnSilverWash
-            // 
-            this.rdbtnSilverWash.AutoSize = true;
-            this.rdbtnSilverWash.Location = new System.Drawing.Point(31, 74);
-            this.rdbtnSilverWash.Name = "rdbtnSilverWash";
-            this.rdbtnSilverWash.Size = new System.Drawing.Size(69, 17);
-            this.rdbtnSilverWash.TabIndex = 1;
-            this.rdbtnSilverWash.Text = "Sølvvask";
-            this.rdbtnSilverWash.UseVisualStyleBackColor = true;
-            this.rdbtnSilverWash.CheckedChanged += new System.EventHandler(this.rdbtnSilverWash_CheckedChanged);
             // 
             // progBarWash
             // 
@@ -120,24 +119,27 @@
             this.btnStartWash.UseVisualStyleBackColor = true;
             this.btnStartWash.Click += new System.EventHandler(this.btnStartWash_Click);
             // 
-            // txtInfoWash
+            // rdbtnGoldWash
             // 
-            this.txtInfoWash.Location = new System.Drawing.Point(207, 40);
-            this.txtInfoWash.Multiline = true;
-            this.txtInfoWash.Name = "txtInfoWash";
-            this.txtInfoWash.Size = new System.Drawing.Size(544, 113);
-            this.txtInfoWash.TabIndex = 8;
-            this.txtInfoWash.Visible = false;
+            this.rdbtnGoldWash.AutoSize = true;
+            this.rdbtnGoldWash.Location = new System.Drawing.Point(31, 110);
+            this.rdbtnGoldWash.Name = "rdbtnGoldWash";
+            this.rdbtnGoldWash.Size = new System.Drawing.Size(70, 17);
+            this.rdbtnGoldWash.TabIndex = 2;
+            this.rdbtnGoldWash.Text = "Guldvask";
+            this.rdbtnGoldWash.UseVisualStyleBackColor = true;
+            this.rdbtnGoldWash.CheckedChanged += new System.EventHandler(this.rdbtnGoldWash_CheckedChanged);
             // 
-            // btnSendStatistic
+            // rdbtnSilverWash
             // 
-            this.btnSendStatistic.Location = new System.Drawing.Point(610, 496);
-            this.btnSendStatistic.Name = "btnSendStatistic";
-            this.btnSendStatistic.Size = new System.Drawing.Size(141, 64);
-            this.btnSendStatistic.TabIndex = 7;
-            this.btnSendStatistic.Text = "Send statistik";
-            this.btnSendStatistic.UseVisualStyleBackColor = true;
-            this.btnSendStatistic.Click += new System.EventHandler(this.btnSendStatistic_Click);
+            this.rdbtnSilverWash.AutoSize = true;
+            this.rdbtnSilverWash.Location = new System.Drawing.Point(31, 74);
+            this.rdbtnSilverWash.Name = "rdbtnSilverWash";
+            this.rdbtnSilverWash.Size = new System.Drawing.Size(69, 17);
+            this.rdbtnSilverWash.TabIndex = 1;
+            this.rdbtnSilverWash.Text = "Sølvvask";
+            this.rdbtnSilverWash.UseVisualStyleBackColor = true;
+            this.rdbtnSilverWash.CheckedChanged += new System.EventHandler(this.rdbtnSilverWash_CheckedChanged);
             // 
             // rdbtnStandardWash
             // 
@@ -152,16 +154,14 @@
             this.rdbtnStandardWash.UseVisualStyleBackColor = true;
             this.rdbtnStandardWash.CheckedChanged += new System.EventHandler(this.rdbtnStandardWash_CheckedChanged);
             // 
-            // rdbtnGoldWash
+            // tcCarWash
             // 
-            this.rdbtnGoldWash.AutoSize = true;
-            this.rdbtnGoldWash.Location = new System.Drawing.Point(31, 110);
-            this.rdbtnGoldWash.Name = "rdbtnGoldWash";
-            this.rdbtnGoldWash.Size = new System.Drawing.Size(70, 17);
-            this.rdbtnGoldWash.TabIndex = 2;
-            this.rdbtnGoldWash.Text = "Guldvask";
-            this.rdbtnGoldWash.UseVisualStyleBackColor = true;
-            this.rdbtnGoldWash.CheckedChanged += new System.EventHandler(this.rdbtnGoldWash_CheckedChanged);
+            this.tcCarWash.Controls.Add(this.tabPage1);
+            this.tcCarWash.Location = new System.Drawing.Point(12, 12);
+            this.tcCarWash.Name = "tcCarWash";
+            this.tcCarWash.SelectedIndex = 0;
+            this.tcCarWash.Size = new System.Drawing.Size(803, 642);
+            this.tcCarWash.TabIndex = 0;
             // 
             // Form1
             // 

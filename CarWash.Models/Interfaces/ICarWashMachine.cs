@@ -11,7 +11,7 @@ namespace CarWash.Models.Interfaces
 		/// <summary>
 		/// Determines if the <see cref="T:CarWash.Models.Interfaces.ICarWashMachine"/> instance is available to set a new job.
 		/// </summary>
-		/// <returns><c>true</c>, if available was ised, <c>false</c> otherwise.</returns>
+		/// <returns><c>true</c>, if the machine is available to start a new program, <c>false</c> otherwise.</returns>
 		bool IsAvailable();
 		/// <summary>
 		/// Cancel the current <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> execution.
