@@ -3,107 +3,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarWash.WashHandler;
+using CarWash.Enum;
+using CarWash.Helpermethods;
 
 namespace CarWash
 {
     public partial class Form1 : Form
     {
         int selectedWash;
-        CancellationTokenSource tcs;
-
-        enum WashType
-        {
-            Standard = 1,
-            Silver = 2,
-            Gold = 3
-        };
+        CancellationTokenSource cts;
 
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void rdbtnStandardWash_CheckedChanged(object sender, EventArgs e)
-        {
-            btnStartWash.Enabled = true;
-            btnCancelWash.Enabled = true;
-            if (rdbtnStandardWash.Checked)
-            {
-                selectedWash = (int)WashType.Standard;
-                StandardInfo();
-            }
-        }
-
-        private void rdbtnSilverWash_CheckedChanged(object sender, EventArgs e)
-        {
-            btnStartWash.Enabled = true;
-            btnCancelWash.Enabled = true;
-            if (rdbtnSilverWash.Checked)
-            {
-                selectedWash = (int)WashType.Silver;
-                txtInfoWash.Visible = true;
-                txtInfoWash.Text = "Sølvvask informationer";
-            }
-        }
-
-        private void rdbtnGoldWash_CheckedChanged(object sender, EventArgs e)
-        {
-            btnStartWash.Enabled = true;
-            btnCancelWash.Enabled = true;
-            if (rdbtnGoldWash.Checked)
-            {
-                selectedWash = (int)WashType.Gold;
-                txtInfoWash.Visible = true;
-                txtInfoWash.Text = "Guldvask informationer";
-            }
-        }
-
-        private void btnCancelWash_Click(object sender, EventArgs e)
-        {
-            //Anullering af vask
-
-            tcs.Cancel();
-
-            lblCurrentStatus.Visible = false;
-
-            btnStartWash.Enabled = true;
-            rdbtnStandardWash.Enabled = true;
-            rdbtnSilverWash.Enabled = true;
-            rdbtnGoldWash.Enabled = true;
-        }
-
-        private void btnSendStatistic_Click(object sender, EventArgs e)
-        {
-            //Statistik af vasken, så kontoret kan lave rapport
-        }
-
-        private void btnStartWash_Click(object sender, EventArgs e)
-        {
-            ///Start af vask
-
-            //Progressbar
-            tcs = new CancellationTokenSource();
-            CancellationToken ct = tcs.Token;
-
-            Task progBar = StartWashProgBar(ct ,new Progress<ImportProgress>(DisplayProgress));
-
-            //Får overført valgt radiobutton
-            int SelectedWash = selectedWash;
-
-            //Sætter labal synlig, og giver den en forudbestemt tekst
-            lblCurrentStatus.Visible = true;
-            lblCurrentStatus.Text = "Vask igang!";
-
-            btnStartWash.Enabled = false;
-            rdbtnStandardWash.Enabled = false;
-            rdbtnSilverWash.Enabled = false;
-            rdbtnGoldWash.Enabled = false;
-        }
-
-        public void StandardInfo()
-        {
-            txtInfoWash.Visible = true;
-            lblCurrentStatus.Text = txtInfoWash.Text = "Standardvask informationer";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -112,26 +24,107 @@ namespace CarWash
             StandardInfo();
         }
 
-        public Task StartWashProgBar(CancellationToken ct ,IProgress<ImportProgress> progressObserver)
+        private void rdbtnStandardWash_CheckedChanged(object sender, EventArgs e)
         {
-            return Task.Run(() =>
+            //Enable start and cancel buttons
+            btnStartWash.Enabled = true;
+            btnCancelWash.Enabled = true;
+
+            //Saves the selected washtype
+            if (rdbtnStandardWash.Checked)
             {
-                for (int i = 0; i <= 100; i++)
-                {
-                    ct.ThrowIfCancellationRequested();
-                    progressObserver.Report(new ImportProgress { OverallProgress = i });
-                    Thread.Sleep(250);
-                }
-            });
+                selectedWash = (int)WashTypes.Standard;
+                StandardInfo();
+            }
         }
 
-        public class ImportProgress
+        public void StandardInfo()
         {
-            public int OverallProgress { get; set; }
+            //Sets info for standard wash
+            txtInfoWash.Visible = true;
+            lblCurrentStatus.Text = txtInfoWash.Text = "Standardvask informationer";
         }
 
-        private void DisplayProgress(ImportProgress progress)
+        private void rdbtnSilverWash_CheckedChanged(object sender, EventArgs e)
         {
+            //Enable start and cancel buttons
+            btnStartWash.Enabled = true;
+            btnCancelWash.Enabled = true;
+
+            //Sets info for the specific wash, saves the selected washtype
+            if (rdbtnSilverWash.Checked)
+            {
+                selectedWash = (int)WashTypes.Silver;
+                txtInfoWash.Visible = true;
+                txtInfoWash.Text = "Sølvvask informationer";
+            }
+        }
+
+        private void rdbtnGoldWash_CheckedChanged(object sender, EventArgs e)
+        {
+            //Enable start and cancel buttons
+            btnStartWash.Enabled = true;
+            btnCancelWash.Enabled = true;
+
+            //Sets info for the specific wash, saves the selected washtype
+            if (rdbtnGoldWash.Checked)
+            {
+                selectedWash = (int)WashTypes.Gold;
+                txtInfoWash.Visible = true;
+                txtInfoWash.Text = "Guldvask informationer";
+            }
+        }
+
+        private void btnCancelWash_Click(object sender, EventArgs e)
+        {
+            ///Cancel wash
+
+            //Cancel current job
+            cts.Cancel();
+
+            //Hides label
+            lblCurrentStatus.Visible = false;
+
+            //Shows radiobuttons and Start
+            btnStartWash.Enabled = true;
+            rdbtnStandardWash.Enabled = true;
+            rdbtnSilverWash.Enabled = true;
+            rdbtnGoldWash.Enabled = true;
+        }
+
+        private void btnSendStatistic_Click(object sender, EventArgs e)
+        {
+            ///Statistics of the wash
+        }
+
+        private void btnStartWash_Click(object sender, EventArgs e)
+        {
+            ///Start wash
+
+            //Reference for progressbar method
+            WashProgressBar wpb = new WashProgressBar();
+
+            //Used for cancellation
+            cts = new CancellationTokenSource();
+            CancellationToken ct = cts.Token;
+
+            //Task for progressbar
+            Task progBar = wpb.StartWashProgBar(ct, new Progress<WashProgress>(DisplayProgress));
+            
+            //Shows Labal, and give it a predetermined text
+            lblCurrentStatus.Visible = true;
+            lblCurrentStatus.Text = "Vask igang!";
+
+            //Hides radiobuttons and Start
+            btnStartWash.Enabled = false;
+            rdbtnStandardWash.Enabled = false;
+            rdbtnSilverWash.Enabled = false;
+            rdbtnGoldWash.Enabled = false;
+        }
+
+        private void DisplayProgress(WashProgress progress)
+        {
+            //Updates the progressbar in UI
             progBarWash.Value = progress.OverallProgress;
         }
     }
