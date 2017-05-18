@@ -42,6 +42,8 @@
     <Compile Include="Processes\RinseProcess.cs" />
     <Compile Include="Processes\DryingProcess.cs" />
     <Compile Include="Processes\WaxProcess.cs" />
+    <Compile Include="Programs\SilverCarWash.cs" />
+    <Compile Include="Programs\GoldCarWash.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
