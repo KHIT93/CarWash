@@ -1,5 +1,4 @@
-﻿﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using CarWash.Models.Interfaces;
 namespace CarWash.Models.Processes
 {
@@ -45,16 +44,19 @@ namespace CarWash.Models.Processes
         public virtual void Cancel()
         {
             this.Running = true;
-            Thread.Sleep(200);
+            Thread.Sleep(20);
             this.Running = false;
-            this.Finished = true;
+            this.Cancelled = true;
         }
 		/// <summary>
 		/// Execute the process
 		/// </summary>
 		public virtual void Execute()
         {
+            this.Running = true;
             Thread.Sleep(this.TimeToRun);
+            this.Running = false;
+            this.Finished = true;
         }
 		/// <summary>
 		/// Skip this process.

@@ -35,6 +35,8 @@ namespace CarWash.Models.Programs
         {
             //Loop through all processes and cancel anything that is currently running
             this.Processes.ForEach(CancelProcess);
+            this.Cancelled = true;
+            this.Running = false;
             Thread.Sleep(100);
         }
 		/// <summary>
@@ -42,12 +44,26 @@ namespace CarWash.Models.Programs
 		/// </summary>
 		public virtual void Execute()
         {
+            this.Running = true;
             foreach (ICarWashProcess process in this.Processes)
             {
                 process.Execute();
             }
+            this.Running = false;
         }
-
+		/// <summary>
+		/// Status for how far this instance is with the processing.
+		/// </summary>
+		/// <returns>The status.</returns>
+        public virtual int Status()
+        {
+            int singleProcessPercentage = 100 / this.Processes.Count;
+            return this.Processes.FindAll(p => p.Finished == true).Count;
+        }
+        /// <summary>
+        /// Cancels a process.
+        /// </summary>
+        /// <param name="process">Process.</param>
         protected virtual void CancelProcess(ICarWashProcess process)
         {
             process.Cancel();

@@ -8,15 +8,15 @@ namespace CarWash.Models.Programs
     {
         public GoldCarWash()
         {
-			//Add Processes specific to this Car Wash Program
-			this.Processes = new List<Interfaces.ICarWashProcess>()
-			{
-				new RinseProcess(),
-				new SoakingProcess(),
-                new WashProcess({ TimeToRun = 240}),
+            //Add Processes specific to this Car Wash Program
+            this.Processes = new List<Interfaces.ICarWashProcess>()
+            {
+                new RinseProcess(),
+                new SoakingProcess(),
+                new WashProcess{ TimeToRun = 240 },
                 new UnderbodyWashProcess(),
                 new WaxProcess(),
-                new DryingProcess({ TimeToRun = 180})
+                new DryingProcess { TimeToRun = 180 }
 			};
         }
     }

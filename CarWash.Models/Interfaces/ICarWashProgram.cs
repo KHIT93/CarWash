@@ -36,5 +36,10 @@ namespace CarWash.Models.Interfaces
         /// Cancel this running program and any processes that are currently running.
         /// </summary>
         void Cancel();
+        /// <summary>
+        /// Status for how far this instance is with the processing.
+        /// </summary>
+        /// <returns>The status.</returns>
+        int Status();
     }
 }
