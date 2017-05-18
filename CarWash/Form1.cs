@@ -88,7 +88,7 @@ namespace CarWash
             rdbtnSilverWash.Enabled = false;
             rdbtnGoldWash.Enabled = false;
 
-            CarWash.WashHandler.SilverWashHandler swh = new WashHandler.SilverWashHandler();
+            WashHandler.SilverWashHandler swh = new WashHandler.SilverWashHandler();
             swh.WashCarSilver(1);
         }
 

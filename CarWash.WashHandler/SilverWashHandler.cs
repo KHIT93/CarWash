@@ -13,6 +13,8 @@ namespace CarWash.WashHandler
     }
     public class SilverWashHandler : ISilverWashHandler
     {
+        SilverCarWash carWash; 
+
         public Task WashCarSilver(int machineID)
         {
             return WashCarSilver(machineID, CancellationToken.None);
@@ -25,18 +27,26 @@ namespace CarWash.WashHandler
 
         public Task WashCarSilver(int machineID, CancellationToken ct, IProgress<SilverCarWash> progress)
         {
+            carWash = new SilverCarWash();
             Task t = new Task(() => 
             {
-                SilverCarWash carWash = new SilverCarWash();
                 carWash.Execute();
+                
             });
 
             t.Start();
-
+            carWash.Execute();
+            Console.WriteLine(GetStatus().ToString());
+            Thread.Sleep(1000);
+            Console.WriteLine(GetStatus().ToString());
             t.Wait();
 
             return t;
         }
-        
+
+        public bool GetStatus()
+        {
+            return carWash.Running;
+        }
     }
 }
