@@ -6,7 +6,7 @@ namespace CarWash.Models.Processes
         public SoakingProcess()
         {
             this.Name = "Soaking";
-            this.TimeToRun = 120;
+            this.TimeToRun = 12000;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace CarWash.Models.Processes
         public WaxProcess()
         {
             this.Name = "Wax";
-            this.TimeToRun = 30;
+            this.TimeToRun = 3000;
         }
     }
 }
