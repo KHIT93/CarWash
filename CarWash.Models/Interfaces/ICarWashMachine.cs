@@ -21,5 +21,9 @@ namespace CarWash.Models.Interfaces
 		/// Execute the assigned <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> instance.
 		/// </summary>
 		void Execute();
+        /// <summary>
+        /// Gets the ID of the currently running instance.
+        /// </summary>
+        int Id();
     }
 }
