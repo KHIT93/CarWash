@@ -44,7 +44,7 @@ namespace CarWash.Models.Processes
         public virtual void Cancel()
         {
             this.Running = true;
-            Thread.Sleep(20);
+            Thread.Sleep(200);
             this.Running = false;
             this.Cancelled = true;
         }
