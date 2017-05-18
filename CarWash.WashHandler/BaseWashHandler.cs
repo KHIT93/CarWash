@@ -2,34 +2,49 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CarWash.Models.Programs;
+using System.ComponentModel;
 
 namespace CarWash
 {
     public interface IBaseWashHandler
     {
-        Task WashCarBase(int machineID);
-        Task WashCarBase(int machineID, CancellationToken ct);
-        Task WashCarBase(int machineID, CancellationToken ct, IProgress<BaseCarWash> progress);
+        void WashCarBase(int machineID);
     }
     class BaseWashHandler : IBaseWashHandler
     {
+        BackgroundWorker bw;
 
-        public Task WashCarBase(int machineID)
+        public void WashCarBase(int machineID)
         {
-            return WashCarBase(machineID, CancellationToken.None);
+            bw = new BackgroundWorker();
+
+            bw.WorkerReportsProgress = true;
+            bw.WorkerSupportsCancellation = true;
+
+            bw.DoWork += WashCarBase_DoWork;
+            bw.ProgressChanged += WashCarBase_ProgressChanged;
+            bw.RunWorkerCompleted += WashCarBase_RunWorkerCompleted;
+
         }
 
-        public Task WashCarBase(int machineID, CancellationToken ct)
+        private void WashCarBase_DoWork(object sender, DoWorkEventArgs e)
         {
-            return WashCarBase(machineID, ct, new Progress<BaseCarWash>());
+
         }
 
-        public Task WashCarBase(int machineID, CancellationToken ct, IProgress<BaseCarWash> progress)
+        private void WashCarBase_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            return Task.Run(() =>
-            {
 
-            });
+        }
+
+        private void WashCarBase_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        public void CancelWashCarBase(int machineID)
+        {
+
         }
     }
 }
