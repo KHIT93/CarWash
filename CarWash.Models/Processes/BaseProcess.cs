@@ -37,7 +37,7 @@ namespace CarWash.Models.Processes
         /// Gets or sets a value indicating whether this <see cref="T:CarWash.Models.Processes.BaseProcess"/> is running.
         /// </summary>
         /// <value><c>true</c> if running; otherwise, <c>false</c>.</value>
-        public abstract bool Running { get; set; }
+        public bool Running { get; set; }
 
         /// <summary>
         /// Cancel this process. This defines when it is allowed to cancel the process.
