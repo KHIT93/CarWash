@@ -124,6 +124,8 @@ namespace CarWash
             rdbtnGoldWash.Enabled = false;
 
             washHandler.StartWash(1, selectedWash);
+            Thread.Sleep(5000);
+            washHandler.GetWashStatus(1);
         }
 
         private void DisplayProgress(WashProgress progress)

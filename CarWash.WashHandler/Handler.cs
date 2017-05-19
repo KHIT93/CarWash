@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CarWash.Models;
 using CarWash.Models.Interfaces;
+using System.Threading;
 
 namespace CarWash.WashHandler
 {
@@ -61,6 +62,14 @@ namespace CarWash.WashHandler
             return machine;
         }
 
+        public void GetWashStatus(int machineID)
+        {
+            CreateMachineIfNotExist(machineID);
+            CarWashMachine machine = machineList.Find(i => i.Id() == machineID);
+            Console.WriteLine(machine.Program.Status().ToString());
+            
+        }
+
         private void StartStandardWash(int machineID)
         {
 
@@ -71,13 +80,17 @@ namespace CarWash.WashHandler
             CreateMachineIfNotExist(machineID);
             CarWashMachine machine = machineList.Find(i => i.Id() == machineID);
             SilverWashHandler handler = new SilverWashHandler();
-            machine.Program = handler.carWash;
+
             handler.WashCarSilver(machineID);
+
+            machine.Program = handler.carWash;
         }
 
         private void StartGoldWash(int machineID)
         {
 
         }
+
+        
     }
 }
