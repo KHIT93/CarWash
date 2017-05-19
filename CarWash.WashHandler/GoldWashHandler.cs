@@ -13,6 +13,13 @@ namespace CarWash.WashHandler
     }
     class GoldWashHandler : IGoldWashHandler
     {
+        public GoldCarWash carWash { get; set; }
+
+        public GoldWashHandler()
+        {
+            carWash = new GoldCarWash();
+        }
+
         public Task WashCarGold(int machineID)
         {
             return WashCarGold(machineID, CancellationToken.None);
@@ -32,7 +39,7 @@ namespace CarWash.WashHandler
         {
             return Task.Run(() =>
             {
-
+                carWash.Execute();
             });
         }
     }

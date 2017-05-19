@@ -29,7 +29,6 @@ namespace CarWash
             bw.DoWork += WashCarStandard_DoWork;
             bw.RunWorkerCompleted += WashCarStandard_RunWorkerCompleted;
             bw.RunWorkerAsync();
-
         }
 
         private void WashCarStandard_DoWork(object sender, DoWorkEventArgs e)

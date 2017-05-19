@@ -88,7 +88,11 @@ namespace CarWash.WashHandler
 
         private void StartGoldWash(int machineID)
         {
+            CarWashMachine machine = CreateMachineIfNotExist(machineID);
+            GoldWashHandler handler = new GoldWashHandler();
 
+            handler.WashCarGold(machineID);
+            machine.Program = handler.carWash;
         }
 
         
