@@ -62,12 +62,11 @@ namespace CarWash.WashHandler
             return machine;
         }
 
-        public void GetWashStatus(int machineID)
+        public int GetWashStatus(int machineID)
         {
             CreateMachineIfNotExist(machineID);
             CarWashMachine machine = machineList.Find(i => i.Id() == machineID);
-            Console.WriteLine(machine.Program.Status().ToString());
-            
+            return machine.Program.Status();
         }
 
         private void StartStandardWash(int machineID)
@@ -80,9 +79,8 @@ namespace CarWash.WashHandler
             CreateMachineIfNotExist(machineID);
             CarWashMachine machine = machineList.Find(i => i.Id() == machineID);
             SilverWashHandler handler = new SilverWashHandler();
-
+            
             handler.WashCarSilver(machineID);
-
             machine.Program = handler.carWash;
         }
 

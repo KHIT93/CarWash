@@ -110,8 +110,8 @@ namespace CarWash
             cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
 
-            //Task for progressbar
-            Task progBar = wpb.StartWashProgBar(ct, new Progress<WashProgress>(DisplayProgress));
+            
+            
             
             //Shows Labal, and give it a predetermined text
             lblCurrentStatus.Visible = true;
@@ -124,8 +124,9 @@ namespace CarWash
             rdbtnGoldWash.Enabled = false;
 
             washHandler.StartWash(1, selectedWash);
-            Thread.Sleep(5000);
-            washHandler.GetWashStatus(1);
+
+            //Task for progressbar
+            Task progBar = wpb.StartWashProgBar(1, washHandler, ct, new Progress<WashProgress>(DisplayProgress));
         }
 
         private void DisplayProgress(WashProgress progress)
