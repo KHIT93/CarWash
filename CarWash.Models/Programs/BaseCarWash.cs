@@ -62,7 +62,7 @@ namespace CarWash.Models.Programs
             int totalProcesses = this.Processes.Count;
             if(completedProcesses != 0)
             {
-                return (completedProcesses / totalProcesses) * 100;
+                return (completedProcesses * 100) / totalProcesses;
             }
             return 0;
         }
