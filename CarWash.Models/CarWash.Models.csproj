@@ -42,6 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\CarWashContext.cs" />
+    <Compile Include="DataModels\User.cs" />
+    <Compile Include="Migrations\201705191028200_Init.cs" />
+    <Compile Include="Migrations\201705191028200_Init.Designer.cs">
+      <DependentUpon>201705191028200_Init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ICarWashProgram.cs" />
@@ -60,10 +65,15 @@
     <Compile Include="Interfaces\ICarWashMachine.cs" />
     <Compile Include="CarWashMachine.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705191028200_Init.resx">
+      <DependentUpon>201705191028200_Init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
