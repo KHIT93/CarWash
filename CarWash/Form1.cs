@@ -23,6 +23,7 @@ namespace CarWash
         private void Form1_Load(object sender, EventArgs e)
         {
             txtInfoWash.Visible = true;
+            selectedWash = 1;
             StandardInfo();
         }
 
@@ -97,6 +98,9 @@ namespace CarWash
         private void btnSendStatistic_Click(object sender, EventArgs e)
         {
             ///Statistics of the wash
+            LoginForm lf = new LoginForm();
+
+            lf.ShowDialog();
         }
 
         private void btnStartWash_Click(object sender, EventArgs e)
@@ -110,8 +114,8 @@ namespace CarWash
             cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
 
-            //Task for progressbar
-            Task progBar = wpb.StartWashProgBar(ct, new Progress<WashProgress>(DisplayProgress));
+            
+            
             
             //Shows Labal, and give it a predetermined text
             lblCurrentStatus.Visible = true;
@@ -124,6 +128,9 @@ namespace CarWash
             rdbtnGoldWash.Enabled = false;
 
             washHandler.StartWash(1, selectedWash);
+
+            //Task for progressbar
+            Task progBar = wpb.StartWashProgBar(1, washHandler, ct, new Progress<WashProgress>(DisplayProgress));
         }
 
         private void DisplayProgress(WashProgress progress)
