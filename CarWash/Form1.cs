@@ -23,6 +23,7 @@ namespace CarWash
         private void Form1_Load(object sender, EventArgs e)
         {
             txtInfoWash.Visible = true;
+            selectedWash = 1;
             StandardInfo();
         }
 
