@@ -45,7 +45,7 @@ namespace CarWash.Models.Processes
         public virtual void Cancel()
         {
             this.Running = true;
-            Task.Delay(200);
+            Thread.Sleep(200);
             this.Running = false;
             this.Cancelled = true;
         }
@@ -55,7 +55,7 @@ namespace CarWash.Models.Processes
 		public virtual void Execute()
         {
             this.Running = true;
-            Task.Delay(this.TimeToRun);
+            Thread.Sleep(this.TimeToRun);
             this.Running = false;
             this.Finished = true;
         }
