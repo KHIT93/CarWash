@@ -59,10 +59,10 @@ namespace CarWash.Models.Programs
         public virtual int Status()
         {
             int completedProcesses = this.Processes.FindAll(p => p.Finished == true).Count;
+            int totalProcesses = this.Processes.Count;
             if(completedProcesses != 0)
             {
-                int singleProcessPercentage = 100 / this.Processes.FindAll(p => p.Finished == true).Count;
-                return singleProcessPercentage;
+                return (completedProcesses * 100) / totalProcesses;
             }
             return 0;
         }
