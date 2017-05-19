@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarWash.Models;
+using CarWash.Models.Interfaces;
 
 namespace CarWash.WashHandler
 {
@@ -67,8 +68,10 @@ namespace CarWash.WashHandler
 
         private void StartSilverWash(int machineID)
         {
+            CreateMachineIfNotExist(machineID);
             CarWashMachine machine = machineList.Find(i => i.Id() == machineID);
             SilverWashHandler handler = new SilverWashHandler();
+            machine.Program = handler.carWash;
             handler.WashCarSilver(machineID);
         }
 

@@ -11,11 +11,13 @@ namespace CarWash
     public partial class Form1 : Form
     {
         int selectedWash;
+        Handler washHandler;
         CancellationTokenSource cts;
 
         public Form1()
         {
             InitializeComponent();
+            washHandler = new Handler();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -120,6 +122,8 @@ namespace CarWash
             rdbtnStandardWash.Enabled = false;
             rdbtnSilverWash.Enabled = false;
             rdbtnGoldWash.Enabled = false;
+
+            washHandler.StartWash(1, selectedWash);
         }
 
         private void DisplayProgress(WashProgress progress)

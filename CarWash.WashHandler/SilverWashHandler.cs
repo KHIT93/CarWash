@@ -13,7 +13,12 @@ namespace CarWash.WashHandler
     }
     class SilverWashHandler : ISilverWashHandler
     {
-        SilverCarWash carWash; 
+        public SilverCarWash carWash { get; set; }
+
+        public SilverWashHandler()
+        {
+            carWash = new SilverCarWash();
+        }
 
         public Task WashCarSilver(int machineID)
         {
