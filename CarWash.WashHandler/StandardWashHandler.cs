@@ -12,34 +12,34 @@ namespace CarWash
     }
     class StandardWashHandler : IStandardWashHandler
     {
+        public StandardCarWash carWash { get; set; }
         BackgroundWorker bw;
+
+        public StandardWashHandler()
+        {
+            carWash = new StandardCarWash();
+        }
 
         public void WashCarStandard(int machineID)
         {
             bw = new BackgroundWorker();
-
-            bw.WorkerReportsProgress = true;
+            
             bw.WorkerSupportsCancellation = true;
 
             bw.DoWork += WashCarStandard_DoWork;
-            bw.ProgressChanged += WashCarStandard_ProgressChanged;
             bw.RunWorkerCompleted += WashCarStandard_RunWorkerCompleted;
+            bw.RunWorkerAsync();
 
         }
 
         private void WashCarStandard_DoWork(object sender, DoWorkEventArgs e)
         {
-
-        }
-
-        private void WashCarStandard_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
+            carWash.Execute();
         }
 
         private void WashCarStandard_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            
         }
 
         public void CancelWashCarStandard(int machineID)
