@@ -26,6 +26,10 @@ namespace CarWash.Models.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Users.AddOrUpdate(
+                u => u.Username,
+                DataModels.User.AddNew("admin", "P@ssw0rd", false)
+            );
         }
     }
 }
