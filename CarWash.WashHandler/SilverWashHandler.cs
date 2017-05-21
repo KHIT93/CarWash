@@ -2,40 +2,32 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CarWash.Models.Programs;
+using CarWash.Models;
 
 namespace CarWash.WashHandler
 {
-    public interface ISilverWashHandler
+    class SilverWashHandler : BaseWashHandler
     {
-        Task WashCarSilver(int machineID);
-        Task WashCarSilver(int machineID, CancellationToken ct);
-        Task WashCarSilver(int machineID, CancellationToken ct, IProgress<SilverCarWash> progress);
-    }
-    class SilverWashHandler : ISilverWashHandler
-    {
-        public SilverCarWash carWash { get; set; }
+        CancellationTokenSource cts;
 
         public SilverWashHandler()
         {
-            carWash = new SilverCarWash();
+            this.WashProgram = new SilverCarWash();
+            this.cts = new CancellationTokenSource();
         }
 
-        public Task WashCarSilver(int machineID)
+        public Task WashCarSilver(int machineID, CancellationTokenSource progressBarCts)
         {
-            return WashCarSilver(machineID, CancellationToken.None);
+            return WashCarSilver(machineID, progressBarCts, new Progress<SilverCarWash>());
         }
 
-        public Task WashCarSilver(int machineID, CancellationToken ct)
+        public Task WashCarSilver(int machineID, CancellationTokenSource progressBarCts, IProgress<SilverCarWash> progress)
         {
-            return WashCarSilver(machineID, ct, new Progress<SilverCarWash>());
-        }
-
-        public Task WashCarSilver(int machineID, CancellationToken ct, IProgress<SilverCarWash> progress)
-        {
-            carWash = new SilverCarWash();
+            CancellationToken ct = cts.Token;
             Task t = new Task(() => 
             {
-                carWash.Execute();
+                SilverCarWash wash = (SilverCarWash)this.WashProgram;
+                wash.Execute(ct, progressBarCts);
                 
             });
 
@@ -44,9 +36,9 @@ namespace CarWash.WashHandler
             return t;
         }
 
-        public bool GetStatus()
+        public override void Cancel()
         {
-            return carWash.Running;
+            cts.Cancel();
         }
     }
 }

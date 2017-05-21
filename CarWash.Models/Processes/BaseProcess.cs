@@ -54,10 +54,13 @@ namespace CarWash.Models.Processes
 		/// </summary>
 		public virtual void Execute()
         {
-            this.Running = true;
-            Thread.Sleep(this.TimeToRun);
-            this.Running = false;
-            this.Finished = true;
+            if (!this.Cancelled)
+            {
+                this.Running = true;
+                Thread.Sleep(this.TimeToRun);
+                this.Running = false;
+                this.Finished = true;
+            }
         }
 		/// <summary>
 		/// Skip this process.

@@ -81,9 +81,7 @@ namespace CarWash
         private void btnCancelWash_Click(object sender, EventArgs e)
         {
             ///Cancel wash
-
-            //Cancel current job
-            cts.Cancel();
+            washHandler.CancelWash(1, cts);
 
             //Hides label
             lblCurrentStatus.Visible = false;
@@ -127,7 +125,7 @@ namespace CarWash
             rdbtnSilverWash.Enabled = false;
             rdbtnGoldWash.Enabled = false;
 
-            washHandler.StartWash(1, selectedWash);
+            washHandler.StartWash(1, selectedWash, cts);
 
             //Task for progressbar
             Task progBar = wpb.StartWashProgBar(1, washHandler, ct, new Progress<WashProgress>(DisplayProgress));

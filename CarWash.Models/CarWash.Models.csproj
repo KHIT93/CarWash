@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseWashHandler.cs" />
     <Compile Include="Database\CarWashContext.cs" />
     <Compile Include="DataModels\User.cs" />
+    <Compile Include="Interfaces\ICarWashHandler.cs" />
     <Compile Include="Migrations\201705191028200_Init.cs" />
     <Compile Include="Migrations\201705191028200_Init.Designer.cs">
       <DependentUpon>201705191028200_Init.cs</DependentUpon>

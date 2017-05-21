@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using CarWash.Models.Processes;
+using CarWash.Models.Interfaces;
+using System.Threading;
+using System.ComponentModel;
 
 namespace CarWash.Models.Programs
 {
@@ -15,6 +18,21 @@ namespace CarWash.Models.Programs
                 new WashProcess(),
                 new DryingProcess()
             };
+        }
+
+        public void Execute(BackgroundWorker bw, CancellationTokenSource progressBarCts)
+        {
+            this.Running = true;
+            foreach (ICarWashProcess process in this.Processes)
+            {
+                if (bw.CancellationPending && !this.Cancelled)
+                {
+                    this.Cancel();
+                    progressBarCts.Cancel();
+                }
+                process.Execute();
+            }
+            this.Running = false;
         }
     }
 }

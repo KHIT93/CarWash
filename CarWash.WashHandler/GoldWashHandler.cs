@@ -1,46 +1,43 @@
-﻿using CarWash.Models.Programs;
+﻿using CarWash.Models;
+using CarWash.Models.Programs;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CarWash.WashHandler
 {
-    public interface IGoldWashHandler
+    class GoldWashHandler : BaseWashHandler
     {
-        Task WashCarGold(int machineID);
-        Task WashCarGold(int machineID, CancellationToken ct);
-        Task WashCarGold(int machineID, CancellationToken ct, IProgress<GoldCarWash> progress);
-    }
-    class GoldWashHandler : IGoldWashHandler
-    {
-        public GoldCarWash carWash { get; set; }
-
+        CancellationTokenSource cts;
         public GoldWashHandler()
         {
-            carWash = new GoldCarWash();
+            this.WashProgram = new GoldCarWash();
+            cts = new CancellationTokenSource();
         }
 
-        public Task WashCarGold(int machineID)
+        public Task WashCarGold(int machineID, CancellationTokenSource progressBarCts)
         {
-            return WashCarGold(machineID, CancellationToken.None);
+            return WashCarGold(machineID, progressBarCts, new Progress<GoldCarWash>());
         }
 
-        public Task WashCarGold(int machineID, CancellationToken ct)
+        public async Task WashCarGold(int machineID, CancellationTokenSource progressBarCts, IProgress<GoldCarWash> progress)
         {
-            return WashCarGold(machineID, ct, new Progress<GoldCarWash>());
+            await RunWash(progressBarCts);
         }
 
-        public async Task WashCarGold(int machineID, CancellationToken ct, IProgress<GoldCarWash> progress)
+        private Task RunWash(CancellationTokenSource progressBarCts)
         {
-            await RunWash();
-        }
-
-        private Task RunWash()
-        {
+            CancellationToken ct = cts.Token;
             return Task.Run(() =>
             {
-                carWash.Execute();
+                GoldCarWash wash = (GoldCarWash)this.WashProgram;
+                wash.Execute(ct, progressBarCts);
             });
+        }
+
+        public override void Cancel()
+        {
+            cts.Cancel();
         }
     }
 }

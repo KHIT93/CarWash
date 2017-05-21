@@ -7,7 +7,7 @@ namespace CarWash.Models.Interfaces
 		/// Gets or sets the <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> instance that should be executed.
 		/// </summary>
 		/// <value>The <see cref="T:CarWash.Models.Interfaces.ICarWashProgram"/> instance.</value>
-		ICarWashProgram Program { get; set; }
+		ICarWashHandler WashHandler { get; set; }
 		/// <summary>
 		/// Determines if the <see cref="T:CarWash.Models.Interfaces.ICarWashMachine"/> instance is available to set a new job.
 		/// </summary>
