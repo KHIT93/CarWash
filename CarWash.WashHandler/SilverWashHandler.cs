@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using CarWash.Models.Programs;
 using CarWash.Models;
+using CarWash.Models.Database;
+using CarWash.Models.DataModels;
 
 namespace CarWash.WashHandler
 {
@@ -23,19 +25,21 @@ namespace CarWash.WashHandler
         /// Starts the silver carwash program as a task
         /// </summary>
         /// <param name="machineID">ID of the machine</param>
-        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
+        /// <param name="progressObserver">The progressobserver used to update the progressbar></param>
         /// <returns>Returns the task used to run the program</returns>
-        public Task WashCarSilver(int machineID, CancellationTokenSource progressBarCts)
+        public Task WashCarSilver(int machineID, IProgress<WashProgress> progressObserver)
         {
             CancellationToken ct = cts.Token;
             Task t = new Task(() => 
             {
                 SilverCarWash wash = (SilverCarWash)this.WashProgram;
-                wash.Execute(ct, progressBarCts);
-                
+                wash.Execute(ct, progressObserver);
+                //this.CreateStatistics(this.WashProgram.GetType().Name);
             });
 
             t.Start();
+            //Task finish = t.ContinueWith(wh => this.SetWashAsFinished(this.washID));
+            //finish.Wait();
 
             return t;
         }
@@ -46,6 +50,7 @@ namespace CarWash.WashHandler
         public override void Cancel()
         {
             cts.Cancel();
+            //this.SetWashAsCancelled(this.washID);
         }
     }
 }

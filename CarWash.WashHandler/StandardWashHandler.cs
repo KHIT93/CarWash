@@ -12,42 +12,48 @@ namespace CarWash
     class StandardWashHandler : BaseWashHandler
     {
         BackgroundWorker bw;
+        IProgress<WashProgress> progressObserver;
+        StandardCarWash wash;
 
         /// <summary>
         /// Initializes the Standard Wash Handler
         /// </summary>
-        public StandardWashHandler()
+        public StandardWashHandler(IProgress<WashProgress> progressObserver)
         {
             this.WashProgram = new StandardCarWash();
+            this.progressObserver = progressObserver;
         }
 
         /// <summary>
         /// Prepares and starts a backgroundworker to handle the standard car wash
         /// </summary>
         /// <param name="machineID">ID of the machine</param>
-        /// <param name="progressCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
-        public void WashCarStandard(int machineID, CancellationTokenSource progressCts)
+        public void WashCarStandard(int machineID)
         {
             bw = new BackgroundWorker();
             
             bw.WorkerSupportsCancellation = true;
+            bw.WorkerReportsProgress = true;
 
             bw.DoWork += WashCarStandard_DoWork;
+            bw.ProgressChanged += WashCarStandard_ProgressChanged;
+
+            bw.RunWorkerAsync();
             bw.RunWorkerCompleted += WashCarStandard_Finished;
-            bw.RunWorkerAsync(progressCts);
+            bw.RunWorkerAsync();
         }
 
         private void WashCarStandard_DoWork(object sender, DoWorkEventArgs e)
         {
-            StandardCarWash wash = (StandardCarWash)this.WashProgram;
-            using (var context = new CarWashContext())
-            {
-                Statistic stats = new Statistic { MachineID = this.MachineID, Program = this.WashProgram.GetType().Name, Running = true, Cancelled = false, Finished = false };
-                context.Statistics.Add(stats);
-                context.SaveChanges();
-                this.washID = stats.Id;
-            }
-            wash.Execute(bw, (CancellationTokenSource)e.Argument);
+            wash = (StandardCarWash)this.WashProgram;
+            wash.Execute(bw);
+            this.CreateStatistics(this.WashProgram.GetType().Name);
+        }
+
+        private void WashCarStandard_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressObserver.Report(new WashProgress { OverallProgress = e.ProgressPercentage, WashProcess = wash.Processes.Find(process => process.Running == true) } );
+            
         }
 
         /// <summary>
@@ -57,13 +63,7 @@ namespace CarWash
         /// <param name="e"></param>
         private void WashCarStandard_Finished(object sender, RunWorkerCompletedEventArgs e)
         {
-            using (var context = new CarWashContext())
-            {
-                Statistic stats = context.Statistics.Find(this.washID);
-                stats.Running = false;
-                stats.Finished = true;
-                context.SaveChanges();
-            }
+            this.SetWashAsFinished(this.washID);
         }
 
         /// <summary>
@@ -72,13 +72,7 @@ namespace CarWash
         public override void Cancel()
         {
             bw.CancelAsync();
-            using (var context = new CarWashContext())
-            {
-                Statistic stats = context.Statistics.Find(this.washID);
-                stats.Running = false;
-                stats.Cancelled = true;
-                context.SaveChanges();
-            }
+            this.SetWashAsCancelled(this.washID);
         }
     }
 }

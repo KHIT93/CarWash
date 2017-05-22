@@ -23,25 +23,25 @@ namespace CarWash.WashHandler
         /// Starts the Gold carwash program as a task
         /// </summary>
         /// <param name="machineID">ID of the machine</param>
-        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
+        /// <param name="progressObserver">The progressobserver used to update the progressbar></param>
         /// <returns>Returns the task used to run the program</returns>
-        public async Task WashCarGold(int machineID, CancellationTokenSource progressBarCts)
+        public async Task WashCarGold(int machineID, IProgress<WashProgress> progressObserver)
         {
-            await RunWashASync(progressBarCts);
+            await RunWashASync(progressObserver);
         }
 
         /// <summary>
         /// Runs the tasks async
         /// </summary>
-        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
+        /// <param name="progressObserver">The progressobserver used to update the progressbar></param>
         /// <returns>Returns the task used to run the program</returns>
-        private Task RunWashASync(CancellationTokenSource progressBarCts)
+        private Task RunWashASync(IProgress<WashProgress> progressObserver)
         {
             CancellationToken ct = cts.Token;
             return Task.Run(() =>
             {
                 GoldCarWash wash = (GoldCarWash)this.WashProgram;
-                wash.Execute(ct, progressBarCts);
+                wash.Execute(ct, progressObserver);
             });
         }
 

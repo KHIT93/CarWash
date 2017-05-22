@@ -43,12 +43,14 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.lblCurrentProcess = new System.Windows.Forms.Label();
             this.tabPage1.SuspendLayout();
             this.tcCarWash.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblCurrentProcess);
             this.tabPage1.Controls.Add(this.txtInfoWash);
             this.tabPage1.Controls.Add(this.btnSendStatistic);
             this.tabPage1.Controls.Add(this.lblCurrentStatus);
@@ -87,13 +89,13 @@
             // 
             // lblCurrentStatus
             // 
-            this.lblCurrentStatus.AutoSize = true;
             this.lblCurrentStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentStatus.Location = new System.Drawing.Point(317, 347);
+            this.lblCurrentStatus.Location = new System.Drawing.Point(207, 334);
             this.lblCurrentStatus.Name = "lblCurrentStatus";
-            this.lblCurrentStatus.Size = new System.Drawing.Size(51, 20);
+            this.lblCurrentStatus.Size = new System.Drawing.Size(343, 44);
             this.lblCurrentStatus.TabIndex = 6;
             this.lblCurrentStatus.Text = "label1";
+            this.lblCurrentStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblCurrentStatus.Visible = false;
             // 
             // progBarWash
@@ -105,7 +107,7 @@
             // 
             // btnCancelWash
             // 
-            this.btnCancelWash.Location = new System.Drawing.Point(300, 496);
+            this.btnCancelWash.Location = new System.Drawing.Point(306, 496);
             this.btnCancelWash.Name = "btnCancelWash";
             this.btnCancelWash.Size = new System.Drawing.Size(141, 64);
             this.btnCancelWash.TabIndex = 4;
@@ -115,7 +117,7 @@
             // 
             // btnStartWash
             // 
-            this.btnStartWash.Location = new System.Drawing.Point(300, 255);
+            this.btnStartWash.Location = new System.Drawing.Point(306, 267);
             this.btnStartWash.Name = "btnStartWash";
             this.btnStartWash.Size = new System.Drawing.Size(141, 64);
             this.btnStartWash.TabIndex = 3;
@@ -241,6 +243,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label lblCurrentProcess;
     }
 }
 

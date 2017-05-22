@@ -26,19 +26,19 @@ namespace CarWash.WashHandler
         /// </summary>
         /// <param name="machineID">ID of the machine</param>
         /// <param name="selectedWash">ID of the selected wash</param>
-        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
-        public void StartWash(int machineID, int selectedWash, CancellationTokenSource progressBarCts)
+        /// <param name="progressObserver">The progressobserver used to update the progressbar></param>
+        public void StartWash(int machineID, int selectedWash, IProgress<WashProgress> progressObserver)
         {
             switch (selectedWash)
             {
                 case 1:
-                    StartStandardWash(machineID, progressBarCts);
+                    StartStandardWash(machineID, progressObserver);
                     break;
                 case 2:
-                    StartSilverWash(machineID, progressBarCts);
+                    StartSilverWash(machineID, progressObserver);
                     break;
                 case 3:
-                    StartGoldWash(machineID, progressBarCts);
+                    StartGoldWash(machineID, progressObserver);
                     break;
                 default:
                     break;
@@ -96,13 +96,13 @@ namespace CarWash.WashHandler
         /// Starts the standard wash
         /// </summary>
         /// <param name="machineID">ID of the machine</param>
-        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
-        private void StartStandardWash(int machineID, CancellationTokenSource progressBarCts)
+        /// <param name="progressObserver">The progressobserver used to update the progressbar></param>
+        private void StartStandardWash(int machineID, IProgress<WashProgress> progressObserver)
         {
             CarWashMachine machine = CreateMachineIfNotExist(machineID);
-            StandardWashHandler handler = new StandardWashHandler();
+            StandardWashHandler handler = new StandardWashHandler(progressObserver);
 
-            handler.WashCarStandard(machineID, progressBarCts);
+            handler.WashCarStandard(machineID);
             machine.WashHandler = handler;
         }
 
@@ -110,13 +110,13 @@ namespace CarWash.WashHandler
         /// Starts the Silver wash
         /// </summary>
         /// <param name="machineID">ID of the machine</param>
-        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
-        private void StartSilverWash(int machineID, CancellationTokenSource progressBarCts)
+        /// <param name="progressObserver">The progressobserver used to update the progressbar></param>
+        private void StartSilverWash(int machineID, IProgress<WashProgress> progressObserver)
         {
             CarWashMachine machine = CreateMachineIfNotExist(machineID);
             SilverWashHandler handler = new SilverWashHandler();
             
-            handler.WashCarSilver(machineID, progressBarCts);
+            handler.WashCarSilver(machineID, progressObserver);
             machine.WashHandler = handler;
         }
 
@@ -124,13 +124,13 @@ namespace CarWash.WashHandler
         /// Starts the Gold wash
         /// </summary>
         /// <param name="machineID">ID of the machine</param>
-        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
-        private void StartGoldWash(int machineID, CancellationTokenSource progressBarCts)
+        /// <param name="progressObserver">The progressobserver used to update the progressbar></param>
+        private void StartGoldWash(int machineID, IProgress<WashProgress> progressObserver)
         {
             CarWashMachine machine = CreateMachineIfNotExist(machineID);
             GoldWashHandler handler = new GoldWashHandler();
 
-            handler.WashCarGold(machineID, progressBarCts);
+            handler.WashCarGold(machineID, progressObserver);
             machine.WashHandler = handler;
         }
 
@@ -141,8 +141,11 @@ namespace CarWash.WashHandler
         public void CancelWash(int machineID)
         {
             CarWashMachine machine = CreateMachineIfNotExist(machineID);
-            machine.WashHandler.Cancel();
-            
+            if (machine.WashHandler != null)
+            {
+                machine.WashHandler.Cancel();
+                machine.WashHandler = null;
+            }
         }
     }
 }

@@ -20,16 +20,26 @@ namespace CarWash.Models.Programs
 			};
         }
 
-        public void Execute(CancellationToken ct, CancellationTokenSource progressBarCts)
+        public void Execute(CancellationToken ct, IProgress<WashProgress> progressObserver)
         {
             this.Running = true;
             foreach (ICarWashProcess process in this.Processes)
             {
-                process.Execute();
                 if (ct.IsCancellationRequested && !this.Cancelled)
                 {
                     this.Cancel();
-                    progressBarCts.Cancel();
+                }
+
+                if (!this.Cancelled)
+                {
+                    progressObserver.Report(new WashProgress { OverallProgress = this.Status(), WashProcess = process });
+                }
+
+                process.Execute();
+
+                if (!this.Cancelled)
+                {
+                    progressObserver.Report(new WashProgress { OverallProgress = this.Status(), WashProcess = process });
                 }
             }
             this.Running = false;

@@ -69,6 +69,7 @@
     <Compile Include="DataModels\Statistic.cs" />
     <Compile Include="Utilities\Randomizer.cs" />
     <Compile Include="Utilities\Hashing.cs" />
+    <Compile Include="WashProgress.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705191028200_Init.resx">
@@ -80,8 +81,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

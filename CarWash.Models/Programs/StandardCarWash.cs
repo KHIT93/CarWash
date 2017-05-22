@@ -12,7 +12,7 @@ namespace CarWash.Models.Programs
         public StandardCarWash()
         {
             //Add Processes specific to this Car Wash Program
-            this.Processes = new List<Interfaces.ICarWashProcess>()
+            this.Processes = new List<ICarWashProcess>()
             {
                 new RinseProcess(),
                 new WashProcess(),
@@ -20,17 +20,28 @@ namespace CarWash.Models.Programs
             };
         }
 
-        public void Execute(BackgroundWorker bw, CancellationTokenSource progressBarCts)
+        public void Execute(BackgroundWorker bw)
         {
             this.Running = true;
+            bw.ReportProgress(this.Status());
             foreach (ICarWashProcess process in this.Processes)
             {
                 if (bw.CancellationPending && !this.Cancelled)
                 {
                     this.Cancel();
-                    progressBarCts.Cancel();
                 }
+
+                if (!this.Cancelled)
+                {
+                    bw.ReportProgress(this.Status());
+                }
+
                 process.Execute();
+
+                if (!this.Cancelled)
+                {
+                    bw.ReportProgress(this.Status());
+                }
             }
             this.Running = false;
         }

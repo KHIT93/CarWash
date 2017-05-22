@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarWash.WashHandler;
 using CarWash.Enum;
-using CarWash.Helpermethods;
+using CarWash.Models;
 
 namespace CarWash
 {
@@ -12,7 +12,6 @@ namespace CarWash
     {
         int selectedWash;
         Handler washHandler;
-        CancellationTokenSource cts;
 
         public Form1()
         {
@@ -103,21 +102,13 @@ namespace CarWash
 
         private void btnStartWash_Click(object sender, EventArgs e)
         {
-            ///Start wash
+            progBarWash.Value = 0;
 
-            //Reference for progressbar method
-            WashProgressBar wpb = new WashProgressBar();
-
-            //Used for cancellation
-            cts = new CancellationTokenSource();
-            CancellationToken ct = cts.Token;
-
-            
-            
-            
             //Shows Labal, and give it a predetermined text
             lblCurrentStatus.Visible = true;
             lblCurrentStatus.Text = "Vask igang!";
+            lblCurrentProcess.Visible = true;
+            lblCurrentProcess.Text = "";
 
             //Hides radiobuttons and Start
             btnStartWash.Enabled = false;
@@ -125,16 +116,24 @@ namespace CarWash
             rdbtnSilverWash.Enabled = false;
             rdbtnGoldWash.Enabled = false;
 
-            washHandler.StartWash(1, selectedWash, cts);
-
-            //Task for progressbar
-            Task progBar = wpb.StartWashProgBar(1, washHandler, ct, new Progress<WashProgress>(DisplayProgress));
+            washHandler.StartWash(1, selectedWash, new Progress<WashProgress>(DisplayProgress));
         }
 
         private void DisplayProgress(WashProgress progress)
         {
             //Updates the progressbar in UI
             progBarWash.Value = progress.OverallProgress;
+            if (progress.WashProcess != null)
+            {
+                lblCurrentProcess.Text = progress.WashProcess.Name;
+            }
+
+            if (progress.OverallProgress == 100)
+            {
+                lblCurrentStatus.Text = "Vask færdig!";
+                lblCurrentProcess.Text = "";
+            }
+            
         }
 
         private void tcCarWash_SelectedIndexChanged(object sender, EventArgs e)
