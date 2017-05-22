@@ -147,6 +147,8 @@ namespace CarWash
             tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(btnCancelWash);
             tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(lblCurrentStatus);
             tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(progBarWash);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(lblCurrentProcess);
+
         }
     }
 }

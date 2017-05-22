@@ -38,7 +38,6 @@ namespace CarWash
             bw.DoWork += WashCarStandard_DoWork;
             bw.ProgressChanged += WashCarStandard_ProgressChanged;
 
-            bw.RunWorkerAsync();
             bw.RunWorkerCompleted += WashCarStandard_Finished;
             bw.RunWorkerAsync();
         }
