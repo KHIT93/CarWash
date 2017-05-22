@@ -81,7 +81,7 @@ namespace CarWash
         private void btnCancelWash_Click(object sender, EventArgs e)
         {
             ///Cancel wash
-            washHandler.CancelWash(1, cts);
+            washHandler.CancelWash(1);
 
             //Hides label
             lblCurrentStatus.Visible = false;

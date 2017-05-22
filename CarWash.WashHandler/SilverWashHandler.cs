@@ -10,18 +10,22 @@ namespace CarWash.WashHandler
     {
         CancellationTokenSource cts;
 
+        /// <summary>
+        /// Initializes the Silver Wash Handler
+        /// </summary>
         public SilverWashHandler()
         {
             this.WashProgram = new SilverCarWash();
             this.cts = new CancellationTokenSource();
         }
 
+        /// <summary>
+        /// Starts the silver carwash program as a task
+        /// </summary>
+        /// <param name="machineID">ID of the machine</param>
+        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
+        /// <returns>Returns the task used to run the program</returns>
         public Task WashCarSilver(int machineID, CancellationTokenSource progressBarCts)
-        {
-            return WashCarSilver(machineID, progressBarCts, new Progress<SilverCarWash>());
-        }
-
-        public Task WashCarSilver(int machineID, CancellationTokenSource progressBarCts, IProgress<SilverCarWash> progress)
         {
             CancellationToken ct = cts.Token;
             Task t = new Task(() => 
@@ -36,6 +40,9 @@ namespace CarWash.WashHandler
             return t;
         }
 
+        /// <summary>
+        /// Cancels the current running program
+        /// </summary>
         public override void Cancel()
         {
             cts.Cancel();
