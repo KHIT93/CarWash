@@ -30,18 +30,12 @@ namespace CarWash.WashHandler
         public Task WashCarSilver(int machineID, IProgress<WashProgress> progressObserver)
         {
             CancellationToken ct = cts.Token;
-            Task t = new Task(() => 
+            return Task.Run(() => 
             {
                 SilverCarWash wash = (SilverCarWash)this.WashProgram;
                 wash.Execute(ct, progressObserver);
-                //this.CreateStatistics(this.WashProgram.GetType().Name);
-            });
-
-            t.Start();
-            //Task finish = t.ContinueWith(wh => this.SetWashAsFinished(this.washID));
-            //finish.Wait();
-
-            return t;
+                this.CreateStatistics(this.WashProgram.GetType().Name);
+            }).ContinueWith(wh => this.SetWashAsFinished(this.washID));
         }
 
         /// <summary>

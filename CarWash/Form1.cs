@@ -148,5 +148,20 @@ namespace CarWash
             rdbtnSilverWash.Enabled = true;
             rdbtnGoldWash.Enabled = true;
         }
+
+        private void tcCarWash_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(rdbtnStandardWash);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(rdbtnSilverWash);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(rdbtnGoldWash);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(txtInfoWash);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(btnStartWash);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(btnSendStatistic);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(btnCancelWash);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(lblCurrentStatus);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(progBarWash);
+            tcCarWash.TabPages[tcCarWash.SelectedIndex].Controls.Add(lblCurrentProcess);
+
+        }
     }
 }

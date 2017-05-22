@@ -40,6 +40,11 @@
             this.rdbtnSilverWash = new System.Windows.Forms.RadioButton();
             this.rdbtnStandardWash = new System.Windows.Forms.RadioButton();
             this.tcCarWash = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.lblCurrentProcess = new System.Windows.Forms.Label();
             this.tabPage1.SuspendLayout();
             this.tcCarWash.SuspendLayout();
             this.SuspendLayout();
@@ -171,11 +176,52 @@
             // tcCarWash
             // 
             this.tcCarWash.Controls.Add(this.tabPage1);
+            this.tcCarWash.Controls.Add(this.tabPage2);
+            this.tcCarWash.Controls.Add(this.tabPage3);
+            this.tcCarWash.Controls.Add(this.tabPage4);
+            this.tcCarWash.Controls.Add(this.tabPage5);
             this.tcCarWash.Location = new System.Drawing.Point(12, 12);
             this.tcCarWash.Name = "tcCarWash";
             this.tcCarWash.SelectedIndex = 0;
             this.tcCarWash.Size = new System.Drawing.Size(803, 642);
             this.tcCarWash.TabIndex = 0;
+            this.tcCarWash.SelectedIndexChanged += new System.EventHandler(this.tcCarWash_SelectedIndexChanged);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(795, 616);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Bilvask 2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(795, 616);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Bilvask 3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(795, 616);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Bilvask 4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(795, 616);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Bilvask 5";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -206,6 +252,10 @@
         private System.Windows.Forms.RadioButton rdbtnGoldWash;
         private System.Windows.Forms.RadioButton rdbtnSilverWash;
         private System.Windows.Forms.RadioButton rdbtnStandardWash;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Label lblCurrentProcess;
     }
 }
