@@ -40,13 +40,7 @@ namespace CarWash
         private void WashCarStandard_DoWork(object sender, DoWorkEventArgs e)
         {
             StandardCarWash wash = (StandardCarWash)this.WashProgram;
-            using (var context = new CarWashContext())
-            {
-                Statistic stats = new Statistic { MachineID = this.MachineID, Program = this.WashProgram.GetType().Name, Running = true, Cancelled = false, Finished = false };
-                context.Statistics.Add(stats);
-                context.SaveChanges();
-                this.washID = stats.Id;
-            }
+            this.CreateStatistics(this.WashProgram.GetType().Name);
             wash.Execute(bw, (CancellationTokenSource)e.Argument);
         }
 
@@ -57,13 +51,7 @@ namespace CarWash
         /// <param name="e"></param>
         private void WashCarStandard_Finished(object sender, RunWorkerCompletedEventArgs e)
         {
-            using (var context = new CarWashContext())
-            {
-                Statistic stats = context.Statistics.Find(this.washID);
-                stats.Running = false;
-                stats.Finished = true;
-                context.SaveChanges();
-            }
+            this.SetWashAsFinished(this.washID);
         }
 
         /// <summary>
@@ -72,13 +60,7 @@ namespace CarWash
         public override void Cancel()
         {
             bw.CancelAsync();
-            using (var context = new CarWashContext())
-            {
-                Statistic stats = context.Statistics.Find(this.washID);
-                stats.Running = false;
-                stats.Cancelled = true;
-                context.SaveChanges();
-            }
+            this.SetWashAsCancelled(this.washID);
         }
     }
 }
