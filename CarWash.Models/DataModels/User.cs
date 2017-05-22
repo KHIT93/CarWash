@@ -55,5 +55,17 @@ namespace CarWash.Models.DataModels
                 return randomNumber;
             }
         }
+
+        public static bool Authenticate(string username, string password)
+        {
+            byte[] pass = Encoding.Unicode.GetBytes(password);
+            Database.CarWashContext context = new Database.CarWashContext();
+            User user = context.Users.Where(u => u.Username == username).First();
+            if (String.Concat(HashPassword(Encoding.Unicode.GetBytes(password), Encoding.Unicode.GetBytes(user.Salt), 50000).Select(item => item.ToString("x2"))) == user.Password)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
