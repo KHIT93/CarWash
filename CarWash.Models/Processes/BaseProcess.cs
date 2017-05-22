@@ -44,9 +44,11 @@ namespace CarWash.Models.Processes
         /// </summary>
         public virtual void Cancel()
         {
-            this.Running = true;
-            Thread.Sleep(200);
-            this.Running = false;
+            if (this.Running)
+            {
+				Thread.Sleep(200);
+				this.Running = false;
+            }
             this.Cancelled = true;
         }
 		/// <summary>
@@ -54,7 +56,7 @@ namespace CarWash.Models.Processes
 		/// </summary>
 		public virtual void Execute()
         {
-            if (!this.Cancelled)
+            if (!this.Cancelled && !this.Skipped)
             {
                 this.Running = true;
                 Thread.Sleep(this.TimeToRun);

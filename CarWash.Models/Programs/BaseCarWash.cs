@@ -35,8 +35,11 @@ namespace CarWash.Models.Programs
 		public virtual void Cancel()
         {
             //Loop through all processes and cancel anything that is currently running
-            this.Processes.ForEach(CancelProcess);
-			this.Cancelled = true;
+            if (this.Running)
+            {
+                this.Processes.ForEach(CancelProcess);
+            }
+            this.Cancelled = true;
             this.Running = false;
         }
 		/// <summary>

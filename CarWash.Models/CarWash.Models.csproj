@@ -66,6 +66,9 @@
     <Compile Include="Programs\GoldCarWash.cs" />
     <Compile Include="Interfaces\ICarWashMachine.cs" />
     <Compile Include="CarWashMachine.cs" />
+    <Compile Include="DataModels\Statistic.cs" />
+    <Compile Include="Utilities\Randomizer.cs" />
+    <Compile Include="Utilities\Hashing.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705191028200_Init.resx">
@@ -77,5 +80,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utilities\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
