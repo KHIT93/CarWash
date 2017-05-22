@@ -66,7 +66,7 @@
             this.btnSendStatistic.Name = "btnSendStatistic";
             this.btnSendStatistic.Size = new System.Drawing.Size(141, 64);
             this.btnSendStatistic.TabIndex = 17;
-            this.btnSendStatistic.Text = "Send statistik";
+            this.btnSendStatistic.Text = "Send statistics";
             this.btnSendStatistic.UseVisualStyleBackColor = true;
             this.btnSendStatistic.Click += new System.EventHandler(this.btnSendStatistic_Click);
             // 
@@ -95,7 +95,7 @@
             this.btnCancelWash.Name = "btnCancelWash";
             this.btnCancelWash.Size = new System.Drawing.Size(141, 64);
             this.btnCancelWash.TabIndex = 14;
-            this.btnCancelWash.Text = "Anuller vask";
+            this.btnCancelWash.Text = "Cancel wash";
             this.btnCancelWash.UseVisualStyleBackColor = true;
             this.btnCancelWash.Click += new System.EventHandler(this.btnCancelWash_Click);
             // 
@@ -105,7 +105,7 @@
             this.btnStartWash.Name = "btnStartWash";
             this.btnStartWash.Size = new System.Drawing.Size(141, 64);
             this.btnStartWash.TabIndex = 13;
-            this.btnStartWash.Text = "Start vask";
+            this.btnStartWash.Text = "Start wash";
             this.btnStartWash.UseVisualStyleBackColor = true;
             this.btnStartWash.Click += new System.EventHandler(this.btnStartWash_Click);
             // 
@@ -114,9 +114,9 @@
             this.rdbtnGoldWash.AutoSize = true;
             this.rdbtnGoldWash.Location = new System.Drawing.Point(33, 125);
             this.rdbtnGoldWash.Name = "rdbtnGoldWash";
-            this.rdbtnGoldWash.Size = new System.Drawing.Size(70, 17);
+            this.rdbtnGoldWash.Size = new System.Drawing.Size(75, 17);
             this.rdbtnGoldWash.TabIndex = 12;
-            this.rdbtnGoldWash.Text = "Guldvask";
+            this.rdbtnGoldWash.Text = "Gold wash";
             this.rdbtnGoldWash.UseVisualStyleBackColor = true;
             this.rdbtnGoldWash.CheckedChanged += new System.EventHandler(this.rdbtnGoldWash_CheckedChanged);
             // 
@@ -125,9 +125,9 @@
             this.rdbtnSilverWash.AutoSize = true;
             this.rdbtnSilverWash.Location = new System.Drawing.Point(33, 89);
             this.rdbtnSilverWash.Name = "rdbtnSilverWash";
-            this.rdbtnSilverWash.Size = new System.Drawing.Size(69, 17);
+            this.rdbtnSilverWash.Size = new System.Drawing.Size(79, 17);
             this.rdbtnSilverWash.TabIndex = 11;
-            this.rdbtnSilverWash.Text = "Sølvvask";
+            this.rdbtnSilverWash.Text = "Silver wash";
             this.rdbtnSilverWash.UseVisualStyleBackColor = true;
             this.rdbtnSilverWash.CheckedChanged += new System.EventHandler(this.rdbtnSilverWash_CheckedChanged);
             // 
@@ -137,10 +137,10 @@
             this.rdbtnStandardWash.Checked = true;
             this.rdbtnStandardWash.Location = new System.Drawing.Point(33, 56);
             this.rdbtnStandardWash.Name = "rdbtnStandardWash";
-            this.rdbtnStandardWash.Size = new System.Drawing.Size(94, 17);
+            this.rdbtnStandardWash.Size = new System.Drawing.Size(96, 17);
             this.rdbtnStandardWash.TabIndex = 10;
             this.rdbtnStandardWash.TabStop = true;
-            this.rdbtnStandardWash.Text = "Standard vask";
+            this.rdbtnStandardWash.Text = "Standard wash";
             this.rdbtnStandardWash.UseVisualStyleBackColor = true;
             this.rdbtnStandardWash.CheckedChanged += new System.EventHandler(this.rdbtnStandardWash_CheckedChanged);
             // 
