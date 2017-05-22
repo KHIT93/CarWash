@@ -24,7 +24,7 @@ namespace CarWash.Models
             }
             set
             {
-                if (this.IsAvailable())
+                if (this.IsAvailable() || value == null)
                 {
                     this._washHandler = value;
                 }

@@ -39,12 +39,14 @@
             this.rdbtnSilverWash = new System.Windows.Forms.RadioButton();
             this.rdbtnStandardWash = new System.Windows.Forms.RadioButton();
             this.tcCarWash = new System.Windows.Forms.TabControl();
+            this.lblCurrentProcess = new System.Windows.Forms.Label();
             this.tabPage1.SuspendLayout();
             this.tcCarWash.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblCurrentProcess);
             this.tabPage1.Controls.Add(this.txtInfoWash);
             this.tabPage1.Controls.Add(this.btnSendStatistic);
             this.tabPage1.Controls.Add(this.lblCurrentStatus);
@@ -83,13 +85,13 @@
             // 
             // lblCurrentStatus
             // 
-            this.lblCurrentStatus.AutoSize = true;
             this.lblCurrentStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentStatus.Location = new System.Drawing.Point(317, 347);
+            this.lblCurrentStatus.Location = new System.Drawing.Point(207, 334);
             this.lblCurrentStatus.Name = "lblCurrentStatus";
-            this.lblCurrentStatus.Size = new System.Drawing.Size(51, 20);
+            this.lblCurrentStatus.Size = new System.Drawing.Size(343, 44);
             this.lblCurrentStatus.TabIndex = 6;
             this.lblCurrentStatus.Text = "label1";
+            this.lblCurrentStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblCurrentStatus.Visible = false;
             // 
             // progBarWash
@@ -101,7 +103,7 @@
             // 
             // btnCancelWash
             // 
-            this.btnCancelWash.Location = new System.Drawing.Point(300, 496);
+            this.btnCancelWash.Location = new System.Drawing.Point(306, 496);
             this.btnCancelWash.Name = "btnCancelWash";
             this.btnCancelWash.Size = new System.Drawing.Size(141, 64);
             this.btnCancelWash.TabIndex = 4;
@@ -111,7 +113,7 @@
             // 
             // btnStartWash
             // 
-            this.btnStartWash.Location = new System.Drawing.Point(300, 255);
+            this.btnStartWash.Location = new System.Drawing.Point(306, 267);
             this.btnStartWash.Name = "btnStartWash";
             this.btnStartWash.Size = new System.Drawing.Size(141, 64);
             this.btnStartWash.TabIndex = 3;
@@ -163,6 +165,17 @@
             this.tcCarWash.Size = new System.Drawing.Size(803, 642);
             this.tcCarWash.TabIndex = 0;
             // 
+            // lblCurrentProcess
+            // 
+            this.lblCurrentProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentProcess.Location = new System.Drawing.Point(207, 449);
+            this.lblCurrentProcess.Name = "lblCurrentProcess";
+            this.lblCurrentProcess.Size = new System.Drawing.Size(343, 44);
+            this.lblCurrentProcess.TabIndex = 9;
+            this.lblCurrentProcess.Text = "label1";
+            this.lblCurrentProcess.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCurrentProcess.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,6 +205,7 @@
         private System.Windows.Forms.RadioButton rdbtnGoldWash;
         private System.Windows.Forms.RadioButton rdbtnSilverWash;
         private System.Windows.Forms.RadioButton rdbtnStandardWash;
+        private System.Windows.Forms.Label lblCurrentProcess;
     }
 }
 

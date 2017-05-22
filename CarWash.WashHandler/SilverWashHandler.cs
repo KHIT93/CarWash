@@ -23,16 +23,15 @@ namespace CarWash.WashHandler
         /// Starts the silver carwash program as a task
         /// </summary>
         /// <param name="machineID">ID of the machine</param>
-        /// <param name="progressBarCts">The Cancellation token source of the progress bar used to show progress of the wash</param>
+        /// <param name="progressObserver">The progressobserver used to update the progressbar></param>
         /// <returns>Returns the task used to run the program</returns>
-        public Task WashCarSilver(int machineID, CancellationTokenSource progressBarCts)
+        public Task WashCarSilver(int machineID, IProgress<WashProgress> progressObserver)
         {
             CancellationToken ct = cts.Token;
             Task t = new Task(() => 
             {
                 SilverCarWash wash = (SilverCarWash)this.WashProgram;
-                wash.Execute(ct, progressBarCts);
-                
+                wash.Execute(ct, progressObserver);
             });
 
             t.Start();
