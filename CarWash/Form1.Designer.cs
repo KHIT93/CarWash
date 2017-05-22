@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblCurrentProcess = new System.Windows.Forms.Label();
             this.txtInfoWash = new System.Windows.Forms.TextBox();
             this.btnSendStatistic = new System.Windows.Forms.Button();
             this.lblCurrentStatus = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@
             this.rdbtnSilverWash = new System.Windows.Forms.RadioButton();
             this.rdbtnStandardWash = new System.Windows.Forms.RadioButton();
             this.tcCarWash = new System.Windows.Forms.TabControl();
-            this.lblCurrentProcess = new System.Windows.Forms.Label();
             this.tabPage1.SuspendLayout();
             this.tcCarWash.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +63,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bilvask 1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lblCurrentProcess
+            // 
+            this.lblCurrentProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentProcess.Location = new System.Drawing.Point(207, 449);
+            this.lblCurrentProcess.Name = "lblCurrentProcess";
+            this.lblCurrentProcess.Size = new System.Drawing.Size(343, 44);
+            this.lblCurrentProcess.TabIndex = 9;
+            this.lblCurrentProcess.Text = "label1";
+            this.lblCurrentProcess.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCurrentProcess.Visible = false;
             // 
             // txtInfoWash
             // 
@@ -103,6 +114,7 @@
             // 
             // btnCancelWash
             // 
+            this.btnCancelWash.Enabled = false;
             this.btnCancelWash.Location = new System.Drawing.Point(306, 496);
             this.btnCancelWash.Name = "btnCancelWash";
             this.btnCancelWash.Size = new System.Drawing.Size(141, 64);
@@ -164,17 +176,6 @@
             this.tcCarWash.SelectedIndex = 0;
             this.tcCarWash.Size = new System.Drawing.Size(803, 642);
             this.tcCarWash.TabIndex = 0;
-            // 
-            // lblCurrentProcess
-            // 
-            this.lblCurrentProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentProcess.Location = new System.Drawing.Point(207, 449);
-            this.lblCurrentProcess.Name = "lblCurrentProcess";
-            this.lblCurrentProcess.Size = new System.Drawing.Size(343, 44);
-            this.lblCurrentProcess.TabIndex = 9;
-            this.lblCurrentProcess.Text = "label1";
-            this.lblCurrentProcess.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCurrentProcess.Visible = false;
             // 
             // Form1
             // 
