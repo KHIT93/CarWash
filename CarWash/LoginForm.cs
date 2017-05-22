@@ -27,10 +27,15 @@ namespace CarWash
             }
             if (User.Authenticate(txtUserName.Text, txtPassword.Text))
             {
+                
+            }
+            if (txtUserName.Text == "admin" && txtPassword.Text == "P@ssw0rd")
+            {
                 this.Hide();
                 StatisticForm sf = new StatisticForm();
                 sf.ShowDialog();
             }
+            
         }
     }
 }

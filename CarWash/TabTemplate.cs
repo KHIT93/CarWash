@@ -96,11 +96,9 @@ namespace CarWash
         private void btnSendStatistic_Click(object sender, EventArgs e)
         {
             ///Statistics of the wash
-            //LoginForm lf = new LoginForm();
+            LoginForm lf = new LoginForm();
 
-            //lf.ShowDialog();
-            StatisticForm sf = new StatisticForm();
-            sf.ShowDialog();
+            lf.ShowDialog();
         }
 
         private void btnStartWash_Click(object sender, EventArgs e)
