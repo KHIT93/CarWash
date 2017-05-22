@@ -27,7 +27,8 @@ namespace CarWash.WashHandler
         /// <returns>Returns the task used to run the program</returns>
         public async Task WashCarGold(int machineID, IProgress<WashProgress> progressObserver)
         {
-            await RunWashASync(progressObserver);
+            await this.RunWashASync(progressObserver);
+            await this.SetWashAsFinishedAsync(this.washID);
         }
 
         /// <summary>
@@ -41,6 +42,7 @@ namespace CarWash.WashHandler
             return Task.Run(() =>
             {
                 GoldCarWash wash = (GoldCarWash)this.WashProgram;
+                this.CreateStatistics(this.WashProgram.GetType().Name);
                 wash.Execute(ct, progressObserver);
             });
         }
@@ -51,6 +53,15 @@ namespace CarWash.WashHandler
         public override void Cancel()
         {
             cts.Cancel();
+            if (this.WashProgram.Running)
+            {
+                this.SetWashAsCancelled(this.washID);
+            }
+        }
+
+        private Task SetWashAsFinishedAsync(Guid WashID)
+        {
+            return Task.Run(() => this.SetWashAsFinished(WashID));
         }
     }
 }
