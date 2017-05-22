@@ -26,6 +26,7 @@ namespace CarWash
                 return;
             }
             User.AddNew(txtUserName.Text, txtPassword.Text);
+            this.Hide();
         }
     }
 }
