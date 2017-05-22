@@ -36,7 +36,6 @@ namespace CarWash.Models.Programs
         {
             //Loop through all processes and cancel anything that is currently running
             this.Processes.ForEach(CancelProcess);
-			Thread.Sleep(100);
 			this.Cancelled = true;
             this.Running = false;
         }

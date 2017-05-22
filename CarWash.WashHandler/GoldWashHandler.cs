@@ -1,39 +1,43 @@
-﻿using CarWash.Models.Programs;
+﻿using CarWash.Models;
+using CarWash.Models.Programs;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CarWash.WashHandler
 {
-    public interface IGoldWashHandler
+    class GoldWashHandler : BaseWashHandler
     {
-        Task WashCarGold(int machineID);
-        Task WashCarGold(int machineID, CancellationToken ct);
-        Task WashCarGold(int machineID, CancellationToken ct, IProgress<GoldCarWash> progress);
-    }
-    class GoldWashHandler : IGoldWashHandler
-    {
-        public Task WashCarGold(int machineID)
+        CancellationTokenSource cts;
+        public GoldWashHandler()
         {
-            return WashCarGold(machineID, CancellationToken.None);
+            this.WashProgram = new GoldCarWash();
+            cts = new CancellationTokenSource();
         }
 
-        public Task WashCarGold(int machineID, CancellationToken ct)
+        public Task WashCarGold(int machineID, CancellationTokenSource progressBarCts)
         {
-            return WashCarGold(machineID, ct, new Progress<GoldCarWash>());
+            return WashCarGold(machineID, progressBarCts, new Progress<GoldCarWash>());
         }
 
-        public async Task WashCarGold(int machineID, CancellationToken ct, IProgress<GoldCarWash> progress)
+        public async Task WashCarGold(int machineID, CancellationTokenSource progressBarCts, IProgress<GoldCarWash> progress)
         {
-            await RunWash();
+            await RunWash(progressBarCts);
         }
 
-        private Task RunWash()
+        private Task RunWash(CancellationTokenSource progressBarCts)
         {
+            CancellationToken ct = cts.Token;
             return Task.Run(() =>
             {
-
+                GoldCarWash wash = (GoldCarWash)this.WashProgram;
+                wash.Execute(ct, progressBarCts);
             });
+        }
+
+        public override void Cancel()
+        {
+            cts.Cancel();
         }
     }
 }

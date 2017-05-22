@@ -18,18 +18,18 @@ namespace CarWash.WashHandler
             machineList = new List<CarWashMachine>();
         }
 
-        public void StartWash(int machineID, int selectedWash)
+        public void StartWash(int machineID, int selectedWash, CancellationTokenSource progressBarCts)
         {
             switch (selectedWash)
             {
                 case 1:
-                    StartStandardWash(machineID);
+                    StartStandardWash(machineID, progressBarCts);
                     break;
                 case 2:
-                    StartSilverWash(machineID);
+                    StartSilverWash(machineID, progressBarCts);
                     break;
                 case 3:
-                    StartGoldWash(machineID);
+                    StartGoldWash(machineID, progressBarCts);
                     break;
                 default:
                     break;
@@ -39,7 +39,7 @@ namespace CarWash.WashHandler
         private bool CheckIfMachineBusy(int machineID)
         {
             CarWashMachine machine = CreateMachineIfNotExist(machineID);
-            if (machine.Program == null)
+            if (machine.WashHandler == null)
             {
                 return false;
             }
@@ -65,32 +65,41 @@ namespace CarWash.WashHandler
         public int GetWashStatus(int machineID)
         {
             CarWashMachine machine = CreateMachineIfNotExist(machineID);
-            return machine.Program.Status();
+            return machine.WashHandler.WashProgram.Status();
         }
 
-        private void StartStandardWash(int machineID)
+        private void StartStandardWash(int machineID, CancellationTokenSource progressBarCts)
         {
             CarWashMachine machine = CreateMachineIfNotExist(machineID);
             StandardWashHandler handler = new StandardWashHandler();
 
-            handler.WashCarStandard(machineID);
-            machine.Program = handler.carWash;
+            handler.WashCarStandard(machineID, progressBarCts);
+            machine.WashHandler = handler;
         }
 
-        private void StartSilverWash(int machineID)
+        private void StartSilverWash(int machineID, CancellationTokenSource progressBarCts)
         {
             CarWashMachine machine = CreateMachineIfNotExist(machineID);
             SilverWashHandler handler = new SilverWashHandler();
             
-            handler.WashCarSilver(machineID);
-            machine.Program = handler.carWash;
+            handler.WashCarSilver(machineID, progressBarCts);
+            machine.WashHandler = handler;
         }
 
-        private void StartGoldWash(int machineID)
+        private void StartGoldWash(int machineID, CancellationTokenSource progressBarCts)
         {
+            CarWashMachine machine = CreateMachineIfNotExist(machineID);
+            GoldWashHandler handler = new GoldWashHandler();
 
+            handler.WashCarGold(machineID, progressBarCts);
+            machine.WashHandler = handler;
         }
 
-        
+        public void CancelWash(int machineID, CancellationTokenSource cts)
+        {
+            CarWashMachine machine = CreateMachineIfNotExist(machineID);
+            machine.WashHandler.Cancel();
+            
+        }
     }
 }
