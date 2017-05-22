@@ -111,6 +111,7 @@ namespace CarWash
             lblCurrentProcess.Text = "";
 
             //Hides radiobuttons and Start
+            btnCancelWash.Enabled = true;
             btnStartWash.Enabled = false;
             rdbtnStandardWash.Enabled = false;
             rdbtnSilverWash.Enabled = false;
@@ -130,10 +131,22 @@ namespace CarWash
 
             if (progress.OverallProgress == 100)
             {
-                lblCurrentStatus.Text = "Vask færdig!";
-                lblCurrentProcess.Text = "";
+                ProgressFinished();
             }
             
+        }
+
+        private void ProgressFinished()
+        {
+            lblCurrentStatus.Text = "Vask færdig!";
+            lblCurrentProcess.Text = "";
+
+            //Shows radiobuttons and Start
+            btnStartWash.Enabled = true;
+            btnCancelWash.Enabled = false;
+            rdbtnStandardWash.Enabled = true;
+            rdbtnSilverWash.Enabled = true;
+            rdbtnGoldWash.Enabled = true;
         }
 
         private void tcCarWash_SelectedIndexChanged(object sender, EventArgs e)
