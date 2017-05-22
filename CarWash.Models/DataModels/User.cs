@@ -60,7 +60,8 @@ namespace CarWash.Models.DataModels
         {
             Database.CarWashContext context = new Database.CarWashContext();
             User user = context.Users.Where(u => u.Username == username).First();
-            if (String.Concat(Hashing.HashPassword(password, user.Salt, 50000).Select(item => item.ToString("x2"))) == user.Password)
+			//if (String.Concat(Hashing.HashPassword(password, user.Salt, 50000).Select(item => item.ToString("x2"))) == user.Password)
+            if (Hashing.HashPassword(password, user.Salt, 50000) == Encoding.Unicode.GetBytes(user.Password))
             {
                 return true;
             }
