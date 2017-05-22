@@ -51,12 +51,15 @@ namespace CarWash.Models
 
         public virtual void SetWashAsCancelled(Guid WashID)
         {
-            using (var context = new CarWashContext())
+            if(this.WashProgram.Running)
             {
-                Statistic stats = context.Statistics.Find(WashID);
-                stats.Running = false;
-                stats.Cancelled = true;
-                context.SaveChanges();
+                using (var context = new CarWashContext())
+                {
+                    Statistic stats = context.Statistics.Find(WashID);
+                    stats.Running = false;
+                    stats.Cancelled = true;
+                    context.SaveChanges();
+                }
             }
         }
     }
