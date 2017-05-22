@@ -1,6 +1,6 @@
 ﻿namespace CarWash
 {
-    partial class Form1
+    partial class StatisticForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.dgvStatistic = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStatistic)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // dgvStatistic
             // 
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(803, 642);
-            this.tabControl1.TabIndex = 0;
+            this.dgvStatistic.AllowUserToAddRows = false;
+            this.dgvStatistic.AllowUserToDeleteRows = false;
+            this.dgvStatistic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStatistic.Location = new System.Drawing.Point(12, 12);
+            this.dgvStatistic.Name = "dgvStatistic";
+            this.dgvStatistic.ReadOnly = true;
+            this.dgvStatistic.Size = new System.Drawing.Size(744, 503);
+            this.dgvStatistic.TabIndex = 0;
             // 
-            // Form1
+            // StatisticForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(827, 666);
-            this.Controls.Add(this.tabControl1);
-            this.Name = "Form1";
-            this.Text = " ";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ClientSize = new System.Drawing.Size(768, 527);
+            this.Controls.Add(this.dgvStatistic);
+            this.Name = "StatisticForm";
+            this.Text = "StatisticForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStatistic)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.DataGridView dgvStatistic;
     }
 }
-
