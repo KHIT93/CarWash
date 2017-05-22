@@ -24,7 +24,7 @@ namespace CarWash
                 tt.Dock = DockStyle.Top;
                 tt.Width = tp.Width;
                 tt.Height = tp.Height;
-                tp.Text = "Vask " + i;
+                tp.Text = "Wash " + i;
                 tt.machineID = i;
                 tp.Controls.Add(tt);
 

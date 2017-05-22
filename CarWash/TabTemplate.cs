@@ -90,7 +90,7 @@ namespace CarWash
             washHandler.CancelWash(machineID);
 
             //Text for label
-            lblCurrentStatus.Text = "Stops wash!";
+            lblCurrentStatus.Text = "Wash cancelling!";
         }
 
         private void btnSendStatistic_Click(object sender, EventArgs e)
@@ -144,7 +144,7 @@ namespace CarWash
 
         private void ProgramCancelled()
         {
-            lblCurrentStatus.Text = "Wash stopped!";
+            lblCurrentStatus.Text = "Wash cancelled!";
             lblCurrentProcess.Text = "";
 
             //Shows radiobuttons and Start
