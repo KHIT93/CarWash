@@ -13,6 +13,7 @@ namespace CarWash.Models
         /// ID of the machine
         /// </summary>
         public int MachineID { get; set; }
+        protected Guid washID;
 
         /// <summary>
         /// The current running wash program
