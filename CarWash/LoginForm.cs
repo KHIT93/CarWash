@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarWash.Models.DataModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,7 @@ namespace CarWash
                 MessageBox.Show("Ikke gyldig indtastning");
                 return;
             }
+            User.AddNew(txtUserName.Text, txtPassword.Text);
         }
     }
 }
