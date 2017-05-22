@@ -5,13 +5,13 @@ using System.Threading;
 using CarWash.Models.Database;
 using CarWash.Models.DataModels;
 using System;
+using System.Data.Entity.Core;
 
 namespace CarWash
 {
     class StandardWashHandler : BaseWashHandler
     {
         BackgroundWorker bw;
-        private CarWashContext dbcontext;
         IProgress<WashProgress> progressObserver;
         StandardCarWash wash;
 
@@ -21,7 +21,6 @@ namespace CarWash
         public StandardWashHandler(IProgress<WashProgress> progressObserver)
         {
             this.WashProgram = new StandardCarWash();
-            this.dbcontext = new CarWashContext();
             this.progressObserver = progressObserver;
         }
 
@@ -40,18 +39,31 @@ namespace CarWash
             bw.ProgressChanged += WashCarStandard_ProgressChanged;
 
             bw.RunWorkerAsync();
+            bw.RunWorkerCompleted += WashCarStandard_Finished;
+            bw.RunWorkerAsync();
         }
-        
+
         private void WashCarStandard_DoWork(object sender, DoWorkEventArgs e)
         {
-            //this.dbcontext.Statistics.Add(new Statistic { MachineID = this.MachineID, Program = this.WashProgram.GetType().Name, Running = true, Cancelled = false, Finished = false });
             wash = (StandardCarWash)this.WashProgram;
             wash.Execute(bw);
+            this.CreateStatistics(this.WashProgram.GetType().Name);
         }
 
         private void WashCarStandard_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressObserver.Report(new WashProgress { OverallProgress = e.ProgressPercentage, WashProcess = wash.Processes.Find(process => process.Running == true) } );
+            
+        }
+
+        /// <summary>
+        /// Runs when the worker has finished and handles persistance of statistics to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WashCarStandard_Finished(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.SetWashAsFinished(this.washID);
         }
 
         /// <summary>
@@ -60,6 +72,7 @@ namespace CarWash
         public override void Cancel()
         {
             bw.CancelAsync();
+            this.SetWashAsCancelled(this.washID);
         }
     }
 }

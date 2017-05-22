@@ -28,22 +28,25 @@ namespace CarWash.Models.DataModels
         /// <param name="persist">If set to <c>true</c> persist the created user to the database.</param>
         public static User AddNew(string username, string password, bool persist = true)
         {
-            StringBuilder sb = new StringBuilder();
-            Database.CarWashContext context = new Database.CarWashContext();
-            byte[] salt = Randomizer.GenerateRandomNumber(32);
-            string salt_string = String.Concat(salt.Select(item => item.ToString("x2")));
-            byte[] pass = Hashing.HashPassword(password, salt, 50000);
-            foreach (byte item in pass)
+            using (var context = new Database.CarWashContext())
             {
-                sb.Append(item.ToString("x2"));
-            }
+                StringBuilder sb = new StringBuilder();
+                byte[] salt = Randomizer.GenerateRandomNumber(32);
+                string salt_string = String.Concat(salt.Select(item => item.ToString("x2")));
+                byte[] pass = Hashing.HashPassword(password, salt, 50000);
+                foreach (byte item in pass)
+                {
+                    sb.Append(item.ToString("x2"));
+                }
 
-            User user = new User { Username = username, Password = sb.ToString(), Salt = salt_string };
-            if (persist)
-            {
-                context.Users.Add(user);
+                User user = new User { Username = username, Password = sb.ToString(), Salt = salt_string };
+                if (persist)
+                {
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                }
+                return user;
             }
-            return user;
         }
 
 

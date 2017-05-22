@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using CarWash.Models.Programs;
 using CarWash.Models;
+using CarWash.Models.Database;
+using CarWash.Models.DataModels;
 
 namespace CarWash.WashHandler
 {
@@ -32,9 +34,12 @@ namespace CarWash.WashHandler
             {
                 SilverCarWash wash = (SilverCarWash)this.WashProgram;
                 wash.Execute(ct, progressObserver);
+                //this.CreateStatistics(this.WashProgram.GetType().Name);
             });
 
             t.Start();
+            //Task finish = t.ContinueWith(wh => this.SetWashAsFinished(this.washID));
+            //finish.Wait();
 
             return t;
         }
@@ -45,6 +50,7 @@ namespace CarWash.WashHandler
         public override void Cancel()
         {
             cts.Cancel();
+            //this.SetWashAsCancelled(this.washID);
         }
     }
 }
