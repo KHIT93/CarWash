@@ -94,6 +94,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Cryptography\RSAWithParameters.cs" />
+    <Compile Include="Communication\Statistics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -109,5 +111,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Cryptography\" />
+    <Folder Include="Communication\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
