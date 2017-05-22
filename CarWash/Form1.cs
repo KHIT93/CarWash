@@ -83,8 +83,8 @@ namespace CarWash
             ///Cancel wash
             washHandler.CancelWash(1, cts);
 
-            //Hides label
-            lblCurrentStatus.Visible = false;
+            //Text for label
+            lblCurrentStatus.Text = "Stopper vask!";
 
             //Shows radiobuttons and Start
             btnStartWash.Enabled = true;
