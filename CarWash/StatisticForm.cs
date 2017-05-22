@@ -15,7 +15,7 @@ namespace CarWash
         public StatisticForm()
         {
             InitializeComponent();
-
+            this.dgvStatistic.DataSource = Communication.Statistics.GetData();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace CarWash.Communication
 {
     public static class Statistics
     {
-        private static List<Statistic> GetData()
+        public static List<Statistic> GetData()
         {
             List<Statistic> stats = new List<Statistic>();
             using (var context = new CarWashContext())
