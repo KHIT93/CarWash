@@ -25,7 +25,12 @@ namespace CarWash
                 MessageBox.Show("Ikke gyldig indtastning");
                 return;
             }
-            User.AddNew(txtUserName.Text, txtPassword.Text);
+            if (User.Authenticate(txtUserName.Text, txtPassword.Text))
+            {
+                this.Hide();
+                StatisticForm sf = new StatisticForm();
+                sf.ShowDialog();
+            }
         }
     }
 }
