@@ -51,7 +51,7 @@ namespace CarWash
         {
             //Sets info for standard wash
             txtInfoWash.Visible = true;
-            lblCurrentStatus.Text = txtInfoWash.Text = "Standardvask informationer";
+            lblCurrentStatus.Text = txtInfoWash.Text = "Standard wash contains Rinse, Wash, Drying";
         }
 
         private void rdbtnSilverWash_CheckedChanged(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace CarWash
             {
                 selectedWash = (int)WashTypes.Silver;
                 txtInfoWash.Visible = true;
-                txtInfoWash.Text = "Sølvvask informationer";
+                txtInfoWash.Text = "Silver wash wash contains Rinse, Soaking, Wash, Drying";
             }
         }
 
@@ -80,7 +80,7 @@ namespace CarWash
             {
                 selectedWash = (int)WashTypes.Gold;
                 txtInfoWash.Visible = true;
-                txtInfoWash.Text = "Guldvask informationer";
+                txtInfoWash.Text = "Gold wash wash contains Rinse, Soaking, Wash, Underbody, Wax, Drying";
             }
         }
 
@@ -90,7 +90,7 @@ namespace CarWash
             washHandler.CancelWash(machineID);
 
             //Text for label
-            lblCurrentStatus.Text = "Stopper vask!";
+            lblCurrentStatus.Text = "Stops wash!";
         }
 
         private void btnSendStatistic_Click(object sender, EventArgs e)
@@ -109,7 +109,7 @@ namespace CarWash
 
             //Shows Labal, and give it a predetermined text
             lblCurrentStatus.Visible = true;
-            lblCurrentStatus.Text = "Vask igang!";
+            lblCurrentStatus.Text = "Wash started!";
             lblCurrentProcess.Visible = true;
             lblCurrentProcess.Text = "";
 
@@ -146,7 +146,7 @@ namespace CarWash
 
         private void ProgramCancelled()
         {
-            lblCurrentStatus.Text = "Vask stoppet!";
+            lblCurrentStatus.Text = "Wash stopped!";
             lblCurrentProcess.Text = "";
 
             //Shows radiobuttons and Start
@@ -159,7 +159,7 @@ namespace CarWash
 
         private void ProgressFinished()
         {
-            lblCurrentStatus.Text = "Vask færdig!";
+            lblCurrentStatus.Text = "Wash done!";
             lblCurrentProcess.Text = "";
 
             //Shows radiobuttons and Start

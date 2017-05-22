@@ -68,19 +68,19 @@
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.Location = new System.Drawing.Point(12, 40);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(84, 19);
+            this.lblUserName.Size = new System.Drawing.Size(75, 19);
             this.lblUserName.TabIndex = 4;
-            this.lblUserName.Text = "Brugernavn";
+            this.lblUserName.Text = "Username";
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(30, 100);
+            this.lblPassword.Location = new System.Drawing.Point(12, 100);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(44, 19);
+            this.lblPassword.Size = new System.Drawing.Size(71, 19);
             this.lblPassword.TabIndex = 5;
-            this.lblPassword.Text = "Kode";
+            this.lblPassword.Text = "Password";
             // 
             // LoginForm
             // 
