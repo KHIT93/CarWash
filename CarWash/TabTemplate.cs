@@ -37,7 +37,7 @@ namespace CarWash
         {
             //Enable start and cancel buttons
             btnStartWash.Enabled = true;
-            btnCancelWash.Enabled = true;
+            //btnCancelWash.Enabled = true;
 
             //Saves the selected washtype
             if (rdbtnStandardWash.Checked)
