@@ -45,8 +45,8 @@ namespace CarWash
         private void WashCarStandard_DoWork(object sender, DoWorkEventArgs e)
         {
             wash = (StandardCarWash)this.WashProgram;
-            wash.Execute(bw);
             this.CreateStatistics(this.WashProgram.GetType().Name);
+            wash.Execute(bw);
         }
 
         private void WashCarStandard_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -61,7 +61,7 @@ namespace CarWash
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void WashCarStandard_Finished(object sender, RunWorkerCompletedEventArgs e)
-        {
+        {            
             this.SetWashAsFinished(this.washID);
         }
 

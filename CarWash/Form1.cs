@@ -84,12 +84,6 @@ namespace CarWash
 
             //Text for label
             lblCurrentStatus.Text = "Stopper vask!";
-
-            //Shows radiobuttons and Start
-            btnStartWash.Enabled = true;
-            rdbtnStandardWash.Enabled = true;
-            rdbtnSilverWash.Enabled = true;
-            rdbtnGoldWash.Enabled = true;
         }
 
         private void btnSendStatistic_Click(object sender, EventArgs e)
@@ -133,7 +127,11 @@ namespace CarWash
             {
                 ProgressFinished();
             }
-            
+
+            if (progress.OverallProgress != 100 && progress.WashProcess == null)
+            {
+                ProgramCancelled();    
+            }
         }
 
         private void ProgressFinished()
@@ -144,6 +142,20 @@ namespace CarWash
             //Shows radiobuttons and Start
             btnStartWash.Enabled = true;
             btnCancelWash.Enabled = false;
+            rdbtnStandardWash.Enabled = true;
+            rdbtnSilverWash.Enabled = true;
+            rdbtnGoldWash.Enabled = true;
+
+            washHandler.WashFinished(1);
+        }
+
+        private void ProgramCancelled()
+        {
+            lblCurrentStatus.Text = "Vask stoppet!";
+            lblCurrentProcess.Text = "";
+
+            //Shows radiobuttons and Start
+            btnStartWash.Enabled = true;
             rdbtnStandardWash.Enabled = true;
             rdbtnSilverWash.Enabled = true;
             rdbtnGoldWash.Enabled = true;

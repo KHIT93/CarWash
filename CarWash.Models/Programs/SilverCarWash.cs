@@ -41,6 +41,10 @@ namespace CarWash.Models.Programs
                 {
                     progressObserver.Report(new WashProgress { OverallProgress = this.Status(), WashProcess = process });
                 }
+                else
+                {
+                    progressObserver.Report(new WashProgress { OverallProgress = this.Status(), WashProcess = null });
+                }
             }
             this.Running = false;
         }

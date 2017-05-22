@@ -147,5 +147,14 @@ namespace CarWash.WashHandler
                 machine.WashHandler = null;
             }
         }
+
+        public void WashFinished(int machineID)
+        {
+            CarWashMachine machine = CreateMachineIfNotExist(machineID);
+            if (machine.WashHandler != null)
+            {
+                machine.WashHandler = null;
+            }
+        }
     }
 }
